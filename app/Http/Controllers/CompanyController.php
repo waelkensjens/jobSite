@@ -2,84 +2,146 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Company;
+use App\Services\Contracts\CompanyServiceContract;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class CompanyController extends Controller
 {
+
+    protected CompanyServiceContract $companyService;
+
+    public function __construct(CompanyServiceContract $companyService)
+    {
+        $this->companyService = $companyService;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        $companies = $this->companyService->list();
+
+        return Inertia::render(
+            component: 'companies/index',
+            props: [
+                'companies' => $companies
+            ]
+        );
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render(
+            component: 'companies/create',
+            props: [
+
+            ]
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StorecompanyRequest $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(StorecompanyRequest $request): Response
     {
-        //
+        $this->companyService->createcompany($request->all());
+
+        $companies = $this->companyService->list();
+
+        return Inertia::render(
+            'companies/Index',
+            [
+                'companies' => $companies
+            ]
+        )->with(
+            [
+                'message' => 'companie was succesfully created'
+            ]
+        );
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param company $company
+     * @return Response
      */
-    public function show(Company $company)
+    public function show(company $company): Response
     {
-        //
+        return Inertia::render(
+            'companies/Description',
+            [
+                'company' => $company
+            ]
+        );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param Company $company
+     * @return Response
      */
-    public function edit(Company $company)
+    public function edit(Company $company): Response
     {
-        //
+        return Inertia::render(
+            'companies/Edit',
+            [
+                'company' => $company
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param company $company
+     * @return RedirectResponse
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, company $company): RedirectResponse
     {
-        //
+        $this->companyService->updatecompanie($company);
+
+        return redirect()->back()->with(
+            [
+                "message" => 'companie successfully updated'
+            ]
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param company $companie
+     * @return RedirectResponse
      */
-    public function destroy(Company $company)
+    public function destroy(company $companie): RedirectResponse
     {
-        //
+        $this->companieService->deletecompanie($companie);
+
+        return redirect()
+            ->back()
+            ->with(
+                [
+                    "message" => 'companie successfully deleted'
+                ]
+            );
     }
 }

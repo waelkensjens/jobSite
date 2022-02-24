@@ -1,21 +1,5 @@
 <template>
 
-    <!--
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
     <div>
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -238,9 +222,6 @@
             </div>
         </div>
     </div>
-
-
-
 </template>
 
 <script>
@@ -263,6 +244,6 @@ let form = useForm({
     password: '',
 });
 let submit = () => {
-    form.post('/users');
+    form.post('/login');
 };
 </script>

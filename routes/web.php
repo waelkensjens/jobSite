@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,39 +18,76 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//admin routes
-
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes Requires authentication
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', function () {
         return inertia('Auth/Login');
     });
-
-    //Path => admin/jobs
+    // path = admin/jobs
     Route::prefix('jobs')->group(function () {
-        Route::get('/', function (){
-            return inertia('Admin/Jobs/Create');
+        Route::get('/',[JobController::class, 'index'])->name('admin.jobs.index');
+        Route::get('/create',[JobController::class, 'create'])->name('admin.jobs.create');
+        Route::post('/create',[JobController::class, 'store'])->name('admin.jobs.store');
+       // job specific routes
+        Route::prefix('/{jobId}')->group(function (){
+            Route::get('/',[JobController::class, 'show'])->name('admin.jobs.show');
+            Route::get('/edit',[JobController::class, 'edit'])->name('admin.jobs.edit');
+            Route::post('/update',[JobController::class, 'update'])->name('admin.jobs.update');
         });
+
     });
     //Path => admin/companies
     Route::prefix('companies')->group(function () {
+        Route::get('/',[CompanyController::class, 'index'])->name('admin.companies.index');
+        Route::get('/create',[CompanyController::class, 'create'])->name('admin.companies.create');
+        Route::post('/create',[CompanyController::class, 'store'])->name('admin.companies.store');
+        //company specific routes
+        Route::prefix('/{companyId}')->group(function (){
+            Route::get('/',[CompanyController::class, 'show'])->name('admin.companies.show');
+            Route::get('/edit',[CompanyController::class, 'edit'])->name('admin.companies.edit');
+            Route::post('/update',[CompanyController::class, 'update'])->name('admin.companies.update');
+        });
 
     });
     //Path => admin/citys
     Route::prefix('cities')->group(function () {
-
+        Route::get('/',[CityController::class, 'index'])->name('admin.cities.index');
+        Route::get('/create',[CityController::class, 'create'])->name('admin.cities.create');
+        Route::post('/create',[CityController::class, 'store'])->name('admin.cities.store');
+        //city specific routes
+        Route::prefix('/{cityId}')->group(function (){
+            Route::get('/',[CityController::class, 'show'])->name('admin.cities.show');
+            Route::get('/edit',[CityController::class, 'edit'])->name('admin.cities.edit');
+            Route::post('/update',[CityController::class, 'update'])->name('admin.cities.update');
+        });
     });
+
     //Path => admin/types
     Route::prefix('types')->group(function () {
-
+        Route::get('/',[TypeController::class, 'index'])->name('admin.types.index');
+        Route::get('/create',[TypeController::class, 'create'])->name('admin.types.create');
+        Route::post('/create',[TypeController::class, 'store'])->name('admin.types.store');
+        //type specific routes
+        Route::prefix('/{typeId}')->group(function (){
+            Route::get('/',[TypeController::class, 'show'])->name('admin.types.show');
+            Route::get('/edit',[TypeController::class, 'edit'])->name('admin.types.edit');
+            Route::post('/update',[TypeController::class, 'update'])->name('admin.types.update');
+        });
     });
 
+    // path => admin/dashboard
     Route::get('/dashboard', function () {
-        return inertia('Auth/Dashboard');
-    });
+        return inertia('Admin/Dashboard');
+    })->name('admin.dashboard');
 
 });
 

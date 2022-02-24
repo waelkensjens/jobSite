@@ -813,6 +813,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Admin/Dashboard": [
+		"./resources/js/Pages/Admin/Dashboard.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Dashboard_vue"
+	],
+	"./Admin/Dashboard.vue": [
+		"./resources/js/Pages/Admin/Dashboard.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Dashboard_vue"
+	],
 	"./Admin/Jobs/Create": [
 		"./resources/js/Pages/Admin/Jobs/Create.vue",
 		"/js/vendor",
@@ -822,16 +832,6 @@ var map = {
 		"./resources/js/Pages/Admin/Jobs/Create.vue",
 		"/js/vendor",
 		"resources_js_Pages_Admin_Jobs_Create_vue"
-	],
-	"./Auth/Dashboard": [
-		"./resources/js/Pages/Auth/Dashboard.vue",
-		"/js/vendor",
-		"resources_js_Pages_Auth_Dashboard_vue"
-	],
-	"./Auth/Dashboard.vue": [
-		"./resources/js/Pages/Auth/Dashboard.vue",
-		"/js/vendor",
-		"resources_js_Pages_Auth_Dashboard_vue"
 	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",
@@ -882,6 +882,16 @@ var map = {
 		"./resources/js/Pages/Dashboard/Index.vue",
 		"/js/vendor",
 		"resources_js_Pages_Dashboard_Index_vue"
+	],
+	"./Home": [
+		"./resources/js/Pages/Home.vue",
+		"/js/vendor",
+		"resources_js_Pages_Home_vue"
+	],
+	"./Home.vue": [
+		"./resources/js/Pages/Home.vue",
+		"/js/vendor",
+		"resources_js_Pages_Home_vue"
 	],
 	"./Organizations/Create": [
 		"./resources/js/Pages/Organizations/Create.vue",

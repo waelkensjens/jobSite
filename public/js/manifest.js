@@ -107,7 +107,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Admin_Jobs_Create_vue":1,"resources_js_Pages_Auth_Dashboard_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Contacts_Create_vue":1,"resources_js_Pages_Contacts_Edit_vue":1,"resources_js_Pages_Contacts_Index_vue":1,"resources_js_Pages_Dashboard_Index_vue":1,"resources_js_Pages_Organizations_Create_vue":1,"resources_js_Pages_Organizations_Edit_vue":1,"resources_js_Pages_Organizations_Index_vue":1,"resources_js_Pages_Reports_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Admin_Dashboard_vue":1,"resources_js_Pages_Admin_Jobs_Create_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Contacts_Create_vue":1,"resources_js_Pages_Contacts_Edit_vue":1,"resources_js_Pages_Contacts_Index_vue":1,"resources_js_Pages_Dashboard_Index_vue":1,"resources_js_Pages_Home_vue":1,"resources_js_Pages_Organizations_Create_vue":1,"resources_js_Pages_Organizations_Edit_vue":1,"resources_js_Pages_Organizations_Index_vue":1,"resources_js_Pages_Reports_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
