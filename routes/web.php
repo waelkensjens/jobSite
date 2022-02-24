@@ -49,7 +49,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 });
 
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/contacts', function () {
     return inertia('Contacts/Index');
