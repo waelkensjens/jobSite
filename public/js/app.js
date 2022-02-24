@@ -813,6 +813,26 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Admin/Jobs/Create": [
+		"./resources/js/Pages/Admin/Jobs/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Create_vue"
+	],
+	"./Admin/Jobs/Create.vue": [
+		"./resources/js/Pages/Admin/Jobs/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Create_vue"
+	],
+	"./Auth/Dashboard": [
+		"./resources/js/Pages/Auth/Dashboard.vue",
+		"/js/vendor",
+		"resources_js_Pages_Auth_Dashboard_vue"
+	],
+	"./Auth/Dashboard.vue": [
+		"./resources/js/Pages/Auth/Dashboard.vue",
+		"/js/vendor",
+		"resources_js_Pages_Auth_Dashboard_vue"
+	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",
 		"/js/vendor",
