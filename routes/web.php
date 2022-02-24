@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*

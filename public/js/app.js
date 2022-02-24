@@ -813,6 +813,86 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Admin/Cities/Create": [
+		"./resources/js/Pages/Admin/Cities/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Create_vue"
+	],
+	"./Admin/Cities/Create.vue": [
+		"./resources/js/Pages/Admin/Cities/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Create_vue"
+	],
+	"./Admin/Cities/Detail": [
+		"./resources/js/Pages/Admin/Cities/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Detail_vue"
+	],
+	"./Admin/Cities/Detail.vue": [
+		"./resources/js/Pages/Admin/Cities/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Detail_vue"
+	],
+	"./Admin/Cities/Edit": [
+		"./resources/js/Pages/Admin/Cities/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Edit_vue"
+	],
+	"./Admin/Cities/Edit.vue": [
+		"./resources/js/Pages/Admin/Cities/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Edit_vue"
+	],
+	"./Admin/Cities/Index": [
+		"./resources/js/Pages/Admin/Cities/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Index_vue"
+	],
+	"./Admin/Cities/Index.vue": [
+		"./resources/js/Pages/Admin/Cities/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Cities_Index_vue"
+	],
+	"./Admin/Companies/Create": [
+		"./resources/js/Pages/Admin/Companies/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Create_vue"
+	],
+	"./Admin/Companies/Create.vue": [
+		"./resources/js/Pages/Admin/Companies/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Create_vue"
+	],
+	"./Admin/Companies/Detail": [
+		"./resources/js/Pages/Admin/Companies/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Detail_vue"
+	],
+	"./Admin/Companies/Detail.vue": [
+		"./resources/js/Pages/Admin/Companies/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Detail_vue"
+	],
+	"./Admin/Companies/Edit": [
+		"./resources/js/Pages/Admin/Companies/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Edit_vue"
+	],
+	"./Admin/Companies/Edit.vue": [
+		"./resources/js/Pages/Admin/Companies/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Edit_vue"
+	],
+	"./Admin/Companies/Index": [
+		"./resources/js/Pages/Admin/Companies/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Index_vue"
+	],
+	"./Admin/Companies/Index.vue": [
+		"./resources/js/Pages/Admin/Companies/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Companies_Index_vue"
+	],
 	"./Admin/Dashboard": [
 		"./resources/js/Pages/Admin/Dashboard.vue",
 		"/js/vendor",
@@ -832,6 +912,76 @@ var map = {
 		"./resources/js/Pages/Admin/Jobs/Create.vue",
 		"/js/vendor",
 		"resources_js_Pages_Admin_Jobs_Create_vue"
+	],
+	"./Admin/Jobs/Detail": [
+		"./resources/js/Pages/Admin/Jobs/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Detail_vue"
+	],
+	"./Admin/Jobs/Detail.vue": [
+		"./resources/js/Pages/Admin/Jobs/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Detail_vue"
+	],
+	"./Admin/Jobs/Edit": [
+		"./resources/js/Pages/Admin/Jobs/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Edit_vue"
+	],
+	"./Admin/Jobs/Edit.vue": [
+		"./resources/js/Pages/Admin/Jobs/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Edit_vue"
+	],
+	"./Admin/Jobs/Index": [
+		"./resources/js/Pages/Admin/Jobs/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Index_vue"
+	],
+	"./Admin/Jobs/Index.vue": [
+		"./resources/js/Pages/Admin/Jobs/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Jobs_Index_vue"
+	],
+	"./Admin/Types/Create": [
+		"./resources/js/Pages/Admin/Types/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Create_vue"
+	],
+	"./Admin/Types/Create.vue": [
+		"./resources/js/Pages/Admin/Types/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Create_vue"
+	],
+	"./Admin/Types/Detail": [
+		"./resources/js/Pages/Admin/Types/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Detail_vue"
+	],
+	"./Admin/Types/Detail.vue": [
+		"./resources/js/Pages/Admin/Types/Detail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Detail_vue"
+	],
+	"./Admin/Types/Edit": [
+		"./resources/js/Pages/Admin/Types/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Edit_vue"
+	],
+	"./Admin/Types/Edit.vue": [
+		"./resources/js/Pages/Admin/Types/Edit.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Edit_vue"
+	],
+	"./Admin/Types/Index": [
+		"./resources/js/Pages/Admin/Types/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Index_vue"
+	],
+	"./Admin/Types/Index.vue": [
+		"./resources/js/Pages/Admin/Types/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Admin_Types_Index_vue"
 	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",

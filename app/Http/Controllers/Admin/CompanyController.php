@@ -1,23 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Company;
-use App\Services\Contracts\CompanyServiceContract;
+use App\Services\CompanyService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use function redirect;
 
 class CompanyController extends Controller
 {
 
-    protected CompanyServiceContract $companyService;
+    protected CompanyService $companyService;
+    protected string $componentPrefix;
 
-    public function __construct(CompanyServiceContract $companyService)
+    public function __construct(CompanyService $companyService)
     {
         $this->companyService = $companyService;
+        $this->componentPrefix = 'Admin/Companies';
     }
 
     /**
@@ -30,7 +34,7 @@ class CompanyController extends Controller
         $companies = $this->companyService->list();
 
         return Inertia::render(
-            component: 'companies/index',
+            component: $this->componentPrefix.'/Index',
             props: [
                 'companies' => $companies
             ]
@@ -45,7 +49,7 @@ class CompanyController extends Controller
     public function create(): Response
     {
         return Inertia::render(
-            component: 'companies/create',
+            component: $this->componentPrefix.'/Create',
             props: [
 
             ]
@@ -60,12 +64,14 @@ class CompanyController extends Controller
      */
     public function store(StorecompanyRequest $request): Response
     {
-        $this->companyService->createcompany($request->all());
+        $this->companyService->createCompany(
+            data: $request->all()
+        );
 
         $companies = $this->companyService->list();
 
         return Inertia::render(
-            'companies/Index',
+            $this->componentPrefix.'/Index',
             [
                 'companies' => $companies
             ]
@@ -85,7 +91,7 @@ class CompanyController extends Controller
     public function show(company $company): Response
     {
         return Inertia::render(
-            'companies/Description',
+            $this->componentPrefix.'/Detail',
             [
                 'company' => $company
             ]
@@ -101,7 +107,7 @@ class CompanyController extends Controller
     public function edit(Company $company): Response
     {
         return Inertia::render(
-            'companies/Edit',
+            $this->componentPrefix.'/Edit',
             [
                 'company' => $company
             ]
@@ -117,7 +123,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, company $company): RedirectResponse
     {
-        $this->companyService->updatecompanie($company);
+        $this->companyService->updateCompany($company, $request->all());
 
         return redirect()->back()->with(
             [
@@ -129,12 +135,12 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param company $companie
+     * @param Company $company
      * @return RedirectResponse
      */
-    public function destroy(company $companie): RedirectResponse
+    public function destroy(company $company): RedirectResponse
     {
-        $this->companieService->deletecompanie($companie);
+        $this->companyService->deleteCompany($company);
 
         return redirect()
             ->back()

@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreCityRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTypeRequest;
 use App\Models\City;
 use App\Models\Type;
-use App\Services\Contracts\TypeServiceContract;
+use App\Services\TypeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use function redirect;
 
 class TypeController extends Controller
 {
 
-    protected TypeServiceContract $typeService;
+    protected TypeService $typeService;
+    protected string $componentPrefix;
 
-    public function __construct(TypeServiceContract $typeService)
+    public function __construct(TypeService $typeService)
     {
         $this->typeService = $typeService;
+        $componentPrefix = 'Admin/Types';
     }
 
     /**
@@ -32,7 +35,7 @@ class TypeController extends Controller
         $types = $this->typeService->list();
 
         return Inertia::render(
-            component: 'Admin/types/index',
+            component: $this->componentPrefix.'/index',
             props: [
                 'types' => $types
             ]
@@ -47,7 +50,7 @@ class TypeController extends Controller
     public function create(): Response
     {
         return Inertia::render(
-            component: 'Admin/Types/create',
+            component: $this->componentPrefix.'/create',
             props: [
 
             ]
@@ -67,7 +70,7 @@ class TypeController extends Controller
         $types = $this->typeService->list();
 
         return Inertia::render(
-            'Admin/Types/Index',
+            $this->componentPrefix.'/Index',
             [
                 'types' => $types
             ]
@@ -87,7 +90,7 @@ class TypeController extends Controller
     public function show(City $city): Response
     {
         return Inertia::render(
-            'cities/Description',
+            $this->componentPrefix.'/Detail',
             [
                 'city' => $city
             ]
@@ -103,7 +106,7 @@ class TypeController extends Controller
     public function edit(Type $type): Response
     {
         return Inertia::render(
-            'Admin/Types/Edit',
+            $this->componentPrefix.'/Edit',
             [
                 'type' => $type
             ]
@@ -139,10 +142,10 @@ class TypeController extends Controller
         $this->typeService->deleteType($type);
 
         return redirect()
-            ->back()
+            ->route('admin.types.index')
             ->with(
                 [
-                    "message" => 'city successfully deleted'
+                    "message" => 'type successfully deleted'
                 ]
             );
     }

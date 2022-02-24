@@ -1,23 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCityRequest;
 use App\Models\City;
-use App\Services\Contracts\CityServiceContract;
+use App\Services\CityService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use function redirect;
 
 class CityController extends Controller
 {
 
-    protected CityServiceContract $cityService;
+    protected CityService $cityService;
+    protected string $componentPrefix;
 
-    public function __construct(CityServiceContract $cityService)
+    public function __construct(CityService $cityService)
     {
         $this->cityService = $cityService;
+        $this->componentPrefix = 'Admin/Cities';
     }
 
     /**
@@ -30,7 +34,7 @@ class CityController extends Controller
         $cities = $this->cityService->list();
 
         return Inertia::render(
-            component: 'cities/index',
+            component: $this->componentPrefix.'/Index',
             props: [
                 'cities' => $cities
             ]
@@ -45,7 +49,7 @@ class CityController extends Controller
     public function create(): Response
     {
         return Inertia::render(
-            component: 'cities/create',
+            component: $this->componentPrefix.'/Create',
             props: [
 
             ]
@@ -65,7 +69,7 @@ class CityController extends Controller
         $cities = $this->cityService->list();
 
         return Inertia::render(
-            'cities/Index',
+            $this->componentPrefix.'/Index',
             [
                 'cities' => $cities
             ]
@@ -85,7 +89,7 @@ class CityController extends Controller
     public function show(City $city): Response
     {
         return Inertia::render(
-            'cities/Description',
+            $this->componentPrefix.'/Detail',
             [
                 'city' => $city
             ]
@@ -101,7 +105,7 @@ class CityController extends Controller
     public function edit(City $city): Response
     {
         return Inertia::render(
-            'Cities/Edit',
+            $this->componentPrefix.'/Edit',
             [
                 'city' => $city
             ]
@@ -117,7 +121,7 @@ class CityController extends Controller
      */
     public function update(Request $request, City $city): RedirectResponse
     {
-        $this->cityService->updateCity($city);
+        $this->cityService->updateCity($city, $request->all());
 
         return redirect()->back()->with(
             [

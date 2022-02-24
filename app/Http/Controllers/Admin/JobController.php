@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
 use App\Models\Job;
-use App\Services\Contracts\JobServiceContract;
-use Illuminate\Contracts\Foundation\Application;
+use App\Services\JobService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Inertia\Response;
+use function redirect;
 
 class JobController extends Controller
 {
 
-    protected JobServiceContract $jobService;
+    protected JobService $jobService;
+    protected string $componentPrefix;
 
-    public function __construct(JobServiceContract $jobService)
+    public function __construct(JobService $jobService)
     {
         $this->jobService = $jobService;
+        $this->componentPrefix = 'Admin/Jobs';
     }
 
     /**
@@ -31,10 +33,8 @@ class JobController extends Controller
     {
         $jobs = $this->jobService->list();
 
-        return \inertia('jobs/index');
-
         return Inertia::render(
-            component: 'jobs/index',
+            component: $this->componentPrefix.'/index',
             props: [
                 'jobs' => $jobs
             ]
@@ -49,7 +49,7 @@ class JobController extends Controller
     public function create(): Response
     {
         return Inertia::render(
-            component: 'jobs/create',
+            component: $this->componentPrefix.'/Create',
             props: [
 
             ]
@@ -69,7 +69,7 @@ class JobController extends Controller
         $jobs = $this->jobService->list();
 
         return Inertia::render(
-            'jobs/Index',
+            $this->componentPrefix.'/Index',
             [
                 'jobs' => $jobs
             ]
@@ -89,7 +89,7 @@ class JobController extends Controller
     public function show(Job $job): Response
     {
         return Inertia::render(
-            'jobs/Description',
+            $this->componentPrefix.'/Detail',
             [
                 'job' => $job
             ]
@@ -105,7 +105,7 @@ class JobController extends Controller
     public function edit(Job $job): Response
     {
         return Inertia::render(
-            'jobs/Edit',
+            $this->componentPrefix.'/Edit',
             [
                 'job' => $job
             ]
