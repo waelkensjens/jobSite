@@ -43,9 +43,10 @@ class JobService implements JobServiceContract
     /**
      * @inheritDoc
      */
-    public function updateJob(Job $job, array $data): bool
+    public function updateJob(int $jobId, array $data): bool
     {
-        // TODO: Implement updateJob() method.
+        $job = $this->getById($jobId);
+        return $this->jobDataService->update($job, $data);
     }
 
     /**

@@ -80,7 +80,6 @@ const { value: email, errorMessage: emailError } = useField('email');
 const { value: password, errorMessage: passwordError } = useField('password');
 
 const submit = handleSubmit((values) => {
-    console.log(values)
     Inertia.post(route('login.store'), {
         email: values.email,
         password: values.password,

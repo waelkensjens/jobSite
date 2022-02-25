@@ -21,7 +21,7 @@
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <form
-                    @submit.prevent="handleSubmit"
+                    @submit.prevent="submit"
                     method="POST">
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -58,7 +58,9 @@
                                     <label for="content" class="block text-sm font-medium text-gray-700">content</label>
                                     <div class="mt-1 relative rounded-md shadow-lg">
                                         <div class="relative w-full text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-teal-300 focus-visible:ring-offset-2 sm:text-sm overflow-hidden">
-                                            <vue-editor v-model="content" />
+                                            <vue-editor id="content"
+                                                        v-model="content">
+                                            </vue-editor>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +101,6 @@
                         </div>
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button
-                                @click="submit"
                                 type="submit"
                                 class="inline-flex justify-center
                                 py-2 px-4 border border-transparent shadow-sm
@@ -210,6 +211,9 @@ const deleteJob = () => {
             )
         }
     })
+}
+const setEditorContent = () => {
+    props.job.content.value = "<h1>Html For Editor</h1>";
 }
 
 </script>

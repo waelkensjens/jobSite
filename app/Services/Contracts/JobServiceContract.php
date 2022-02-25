@@ -34,11 +34,11 @@ interface JobServiceContract
     /**
      * Update a given job
      *
-     * @param Job   $job The given job to update
+     * @param int $jobId
      * @param array $data The data we need to update on the job
      * @return bool
      */
-    public function updateJob(Job $job, array $data): bool;
+    public function updateJob(int $jobId, array $data): bool;
 
     /**
      * Delete a given job

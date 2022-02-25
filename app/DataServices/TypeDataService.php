@@ -32,16 +32,16 @@ class TypeDataService implements TypeDataServiceContract
 
     public function createType(array $data): Type
     {
-        // TODO: Implement createType() method.
+        return Type::create($data);
     }
 
     public function updateType(Type $type, array $data): bool
     {
-        // TODO: Implement updateType() method.
+        return $type->update($data);
     }
 
     public function deleteType(Type $type): bool
     {
-        // TODO: Implement deleteType() method.
+        return $type->delete();
     }
 }

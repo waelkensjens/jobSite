@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Company;
-use App\Services\CompanyService;
+use App\Services\Contracts\CompanyServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,10 +15,10 @@ use function redirect;
 class CompanyController extends Controller
 {
 
-    protected CompanyService $companyService;
+    protected CompanyServiceContract $companyService;
     protected string $componentPrefix;
 
-    public function __construct(CompanyService $companyService)
+    public function __construct(CompanyServiceContract $companyService)
     {
         $this->companyService = $companyService;
         $this->componentPrefix = 'Admin/Companies';

@@ -53,7 +53,6 @@ __webpack_require__.r(__webpack_exports__);
         passwordError = _useField2.errorMessage;
 
     var submit = handleSubmit(function (values) {
-      console.log(values);
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.post(route('login.store'), {
         email: values.email,
         password: values.password,

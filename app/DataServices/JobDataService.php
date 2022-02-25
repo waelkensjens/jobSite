@@ -32,4 +32,9 @@ class JobDataService implements Contracts\JobDataServiceContract
     {
         return $job->delete();
     }
+
+    public function update(Job $job, array $data): bool
+    {
+        return $job->update($data);
+    }
 }
