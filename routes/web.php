@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::get('/admin', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
@@ -29,9 +29,6 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return inertia('Auth/Login');
-    });
     // path = admin/jobs
     Route::prefix('jobs')->group(function () {
         Route::get('/',[JobController::class, 'index'])->name('admin.jobs.index');

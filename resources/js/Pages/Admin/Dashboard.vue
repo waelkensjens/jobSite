@@ -4,13 +4,13 @@
 
 
 <script>
-import DashboardLayout from '../../Shared/DashboardLayout'
+import Layout from '../../Shared/Layout'
 
 export default {
     components: {
 
     },
-    layout: DashboardLayout,
+    layout: Layout,
 }
 </script>
 <script setup>

@@ -11,6 +11,10 @@ class LoginController extends Controller
 {
     public function create()
     {
+        if (auth()->user()) {
+            return Inertia::location(route('admin.dashboard'));
+        }
+
         return Inertia::render('Auth/Login');
     }
 
