@@ -14,7 +14,8 @@ class Job extends Model
     protected $guarded = [];
 
     protected $with = [
-        'company'
+        'company',
+        'type'
     ];
 
     /**

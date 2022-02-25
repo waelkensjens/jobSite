@@ -1,13 +1,17 @@
 <template>
 
+<sidebar/>
+
 </template>
 
-<script>
-export default {
-name: "DashboardLayout"
-}
-</script>
+<script setup>
+import Sidebar from "../components/Sidebar";
 
+const props = defineProps({
+
+})
+
+</script>
 <style scoped>
 
 </style>

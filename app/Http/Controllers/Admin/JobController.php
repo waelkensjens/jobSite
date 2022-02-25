@@ -29,12 +29,12 @@ class JobController extends Controller
      *
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $jobs = $this->jobService->list();
+        $jobs = $this->jobService->paginated();
 
         return Inertia::render(
-            component: $this->componentPrefix.'/index',
+            component: $this->componentPrefix.'/Index',
             props: [
                 'jobs' => $jobs
             ]

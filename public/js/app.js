@@ -993,46 +993,6 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Auth_Login_vue"
 	],
-	"./Contacts/Create": [
-		"./resources/js/Pages/Contacts/Create.vue",
-		"/js/vendor",
-		"resources_js_Pages_Contacts_Create_vue"
-	],
-	"./Contacts/Create.vue": [
-		"./resources/js/Pages/Contacts/Create.vue",
-		"/js/vendor",
-		"resources_js_Pages_Contacts_Create_vue"
-	],
-	"./Contacts/Edit": [
-		"./resources/js/Pages/Contacts/Edit.vue",
-		"/js/vendor",
-		"resources_js_Pages_Contacts_Edit_vue"
-	],
-	"./Contacts/Edit.vue": [
-		"./resources/js/Pages/Contacts/Edit.vue",
-		"/js/vendor",
-		"resources_js_Pages_Contacts_Edit_vue"
-	],
-	"./Contacts/Index": [
-		"./resources/js/Pages/Contacts/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Contacts_Index_vue"
-	],
-	"./Contacts/Index.vue": [
-		"./resources/js/Pages/Contacts/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Contacts_Index_vue"
-	],
-	"./Dashboard/Index": [
-		"./resources/js/Pages/Dashboard/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Dashboard_Index_vue"
-	],
-	"./Dashboard/Index.vue": [
-		"./resources/js/Pages/Dashboard/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Dashboard_Index_vue"
-	],
 	"./Home": [
 		"./resources/js/Pages/Home.vue",
 		"/js/vendor",
@@ -1042,46 +1002,6 @@ var map = {
 		"./resources/js/Pages/Home.vue",
 		"/js/vendor",
 		"resources_js_Pages_Home_vue"
-	],
-	"./Organizations/Create": [
-		"./resources/js/Pages/Organizations/Create.vue",
-		"/js/vendor",
-		"resources_js_Pages_Organizations_Create_vue"
-	],
-	"./Organizations/Create.vue": [
-		"./resources/js/Pages/Organizations/Create.vue",
-		"/js/vendor",
-		"resources_js_Pages_Organizations_Create_vue"
-	],
-	"./Organizations/Edit": [
-		"./resources/js/Pages/Organizations/Edit.vue",
-		"/js/vendor",
-		"resources_js_Pages_Organizations_Edit_vue"
-	],
-	"./Organizations/Edit.vue": [
-		"./resources/js/Pages/Organizations/Edit.vue",
-		"/js/vendor",
-		"resources_js_Pages_Organizations_Edit_vue"
-	],
-	"./Organizations/Index": [
-		"./resources/js/Pages/Organizations/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Organizations_Index_vue"
-	],
-	"./Organizations/Index.vue": [
-		"./resources/js/Pages/Organizations/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Organizations_Index_vue"
-	],
-	"./Reports/Index": [
-		"./resources/js/Pages/Reports/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Reports_Index_vue"
-	],
-	"./Reports/Index.vue": [
-		"./resources/js/Pages/Reports/Index.vue",
-		"/js/vendor",
-		"resources_js_Pages_Reports_Index_vue"
 	]
 };
 function webpackAsyncContext(req) {

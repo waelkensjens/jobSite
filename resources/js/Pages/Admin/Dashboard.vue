@@ -1,13 +1,25 @@
 <template>
-<h1>hzehjrelersfd</h1>
+        <h1 class="text-2xl font-extrabold">hello</h1>
 </template>
 
+
 <script>
+import DashboardLayout from '../../Shared/DashboardLayout'
+
 export default {
-    name: "Dashboard"
+    components: {
+
+    },
+    layout: DashboardLayout,
 }
+</script>
+<script setup>
+
+
+const props = defineProps({
+})
+
 </script>
 
 <style scoped>
-
 </style>

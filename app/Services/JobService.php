@@ -2,21 +2,11 @@
 
 namespace App\Services;
 
-use App\DataServices\Contracts\JobDataServiceContract;
 use App\Models\Job;
 use Illuminate\Support\Collection;
 
-class JobService implements Contracts\JobServiceContract
+class JobService
 {
-
-    protected JobDataServiceContract $jobDataService;
-
-    public function __construct(
-        JobDataServiceContract $jobDataService
-    ) {
-        $this->jobDataService = $jobDataService;
-    }
-
     /**
      * @inheritDoc
      */
@@ -25,6 +15,11 @@ class JobService implements Contracts\JobServiceContract
         return $this->jobDataService->list();
     }
 
+
+    public function paginated($perPage = 20)
+    {
+       return  Job::paginate($perPage);
+    }
     /**
      * @inheritDoc
      */
