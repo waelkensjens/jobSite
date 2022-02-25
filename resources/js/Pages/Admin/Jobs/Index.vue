@@ -1,53 +1,101 @@
 <template>
+    <div>
+        <Head title="jobs" />
+        <h1 class="mb-8 text-3xl font-bold">jobs</h1>
+        <div class="flex items-center justify-between mb-6">
 
-    <div class="w-3/4 mx-auto p-6 bg-white rounded-lg shadow-xl">
-        <div class="w-full flex">
-            <h1 class="text-base">Jobs</h1>
-            <icon></icon>
+            <Link class="btn-indigo" :href="route('admin.jobs.create')">
+                <span>Create</span>
+                <span class="hidden md:inline">&nbsp;job</span>
+            </Link>
         </div>
-
-
-        <div class="pt-4">
-            <table class="table-auto shadow-lg bg-white">
+        <div class="bg-white rounded-md shadow overflow-x-auto">
+            <table class="w-full whitespace-nowrap">
                 <thead>
-                <tr>
-                    <th class="bg-blue-100 border text-left px-8 py-4">title</th>
-                    <th class="bg-blue-100 border text-left px-8 py-4">description</th>
-                    <th class="bg-blue-100 border text-left px-8 py-4">company</th>
-                    <th class="bg-blue-100 border text-left px-8 py-4">type</th>
-                    <th class="bg-blue-100 border text-left px-8 py-4">active</th>
+                <tr class="text-left font-bold">
+                    <th class="pb-4 pt-6 px-6">Name</th>
+                    <th class="pb-4 pt-6 px-6">City</th>
+                    <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
                 </tr>
                 </thead>
                 <tbody>
-
-                <tr v-for="(job, index) in props.jobs.data" :key="job.id">
-                    <td class="border px-8 py-4">{{ job.title }}</td>
-                    <td class="border px-8 py-4">{{ job.description }}</td>
-                    <td class="border px-8 py-4">{{ job.company.name }}</td>
-                    <td class="border px-8 py-4">{{ job.type_id }}</td>
-                    <td class="border px-8 py-4">{{ job.is_active }}</td>
+                <tr v-for="job in jobs.data" :key="job.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.jobs.edit', {jobId: job.id})">
+                            {{ job.title }}
+                            <icon v-if="job.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+                        </Link>
+                    </td>
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
+                            {{ job.company.name }}
+                        </Link>
+                    </td>
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
+                            {{ job.type?.title }}
+                        </Link>
+                    </td>
+                    <td class="w-px border-t">
+                        <Link class="flex items-center px-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
+                            <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+                        </Link>
+                    </td>
+                </tr>
+                <tr v-if="jobs.data.length === 0">
+                    <td class="px-6 py-4 border-t" colspan="4">No jobs found.</td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <pagination class="mt-6" :links="jobs.links" />
     </div>
-
-
-
 </template>
+<script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
+import Icon from '../../../Shared/Icon'
+import pickBy from 'lodash/pickBy'
+import Layout from '../../../Shared/Layout'
+import throttle from 'lodash/throttle'
+import mapValues from 'lodash/mapValues'
+import Pagination from '../../../Shared/Pagination'
+import SearchFilter from '../../../Shared/SearchFilter'
 
+export default {
+    components: {
+        Head,
+        Icon,
+        Link,
+        Pagination,
+        SearchFilter,
+    },
+    layout: Layout,
+    props: {
+        filters: Object,
+        organizations: Object,
+    },
+    watch: {
+        form: {
+            deep: true,
+            handler: throttle(function () {
+                this.$inertia.get('/organizations', pickBy(this.form), { preserveState: true })
+            }, 150),
+        },
+    },
+    methods: {
+        reset() {
+            this.form = mapValues(this.form, () => null)
+        },
+    },
+}
+</script>
 <script setup>
 
+const props = defineProps(
+    {jobs: Object}
+)
 
-const props = defineProps({
-    jobs: {
-        type: Object,
-    },
-})
 
-console.log(props.jobs.data)
 </script>
-
 <style scoped>
-
 </style>

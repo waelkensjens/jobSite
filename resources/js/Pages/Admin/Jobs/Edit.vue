@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import Layout from "../../../Shared/Layout";
+
 export default {
-    name: "Edit"
+    name: "Edit",
+
+    layout: Layout
 }
 </script>
 

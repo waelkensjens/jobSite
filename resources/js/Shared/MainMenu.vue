@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="mb-4">
-      <Link class="group flex items-center py-3" href="/">
+      <Link class="group flex items-center py-3" :href="route('admin.cities.index')">
         <icon name="dashboard" class="mr-2 w-4 h-4" :class="isUrl('') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Jobs</div>
       </Link>
     </div>
     <div class="mb-4">
-      <Link class="group flex items-center py-3" href="/organizations">
+      <Link class="group flex items-center py-3" :href="route('admin.cities.index')">
         <icon name="office" class="mr-2 w-4 h-4" :class="isUrl('organizations') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('organizations') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Companies</div>
       </Link>
     </div>
     <div class="mb-4">
-      <Link class="group flex items-center py-3" href="/contacts">
+      <Link class="group flex items-center py-3" :href="route('admin.cities.index')">
         <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('contacts') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('contacts') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Types</div>
       </Link>

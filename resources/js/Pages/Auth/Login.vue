@@ -5,7 +5,8 @@
       <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
       <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="submit">
         <div class="px-10 py-12">
-          <h1 class="text-center text-3xl font-bold">Welcome Back!</h1>
+          <h1 class="text-center text-3xl font-bold mb-8">Welcome Back!</h1>
+            <span v-if="errors.email" class="text-red-600 text-sm">{{ errors.email }}</span>
             <div class="rounded-md shadow-sm -space-y-px">
                 <span v-if="emailError" class="text-red-600 text-sm">{{emailError}}</span>
                 <div>
@@ -61,7 +62,9 @@ import * as yup from "yup";
 import {useField, useForm} from "vee-validate";
 import {Inertia} from "@inertiajs/inertia";
 
-
+const props = defineProps({
+    errors: Object
+})
 
 const schema = yup.object({
     email: yup.string().required().email(),

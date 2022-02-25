@@ -13,11 +13,6 @@ class Job extends Model
 
     protected $guarded = [];
 
-    protected $with = [
-        'company',
-        'type'
-    ];
-
     /**
      * Company relation a job belongs to a company
      *
@@ -36,6 +31,6 @@ class Job extends Model
      */
     public function type(): HasOne
     {
-        return $this->hasOne(Type::class, 'id');
+        return $this->hasOne(Type::class, 'id', 'type_id');
     }
 }

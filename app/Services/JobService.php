@@ -2,11 +2,21 @@
 
 namespace App\Services;
 
+use App\DataServices\Contracts\JobDataServiceContract;
 use App\Models\Job;
+use App\Services\Contracts\JobServiceContract;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
-class JobService
+class JobService implements JobServiceContract
 {
+    protected JobDataServiceContract $jobDataService;
+
+    public function __construct(JobDataServiceContract $jobDataService)
+    {
+        $this->jobDataService = $jobDataService;
+    }
+
     /**
      * @inheritDoc
      */
@@ -15,10 +25,12 @@ class JobService
         return $this->jobDataService->list();
     }
 
-
-    public function paginated($perPage = 20)
+    /**
+     * @inheritDoc
+     */
+    public function paginated($perPage = null, $relations = []): LengthAwarePaginator
     {
-       return  Job::paginate($perPage);
+       return  $this->jobDataService->paginated($perPage, $relations);
     }
     /**
      * @inheritDoc
@@ -42,5 +54,10 @@ class JobService
     public function deleteJob(Job $job): bool
     {
         // TODO: Implement deleteJob() method.
+    }
+
+    public function getById(int $jobId)
+    {
+        return $this->jobDataService->getById($jobId);
     }
 }

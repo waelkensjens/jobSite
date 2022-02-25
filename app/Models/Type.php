@@ -16,10 +16,10 @@ class Type extends Model
     /**
      * jobs relation a type can have many jobs
      *
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function jobs(): HasMany
+    public function jobs(): BelongsToMany
     {
-        return $this->hasMany(Job::class);
+        return $this->belongsToMany(Job::class);
     }
 }

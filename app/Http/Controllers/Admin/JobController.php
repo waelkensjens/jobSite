@@ -8,6 +8,7 @@ use App\Models\Job;
 use App\Services\JobService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 use function redirect;
@@ -15,8 +16,8 @@ use function redirect;
 class JobController extends Controller
 {
 
-    protected JobService $jobService;
     protected string $componentPrefix;
+    private JobService $jobService;
 
     public function __construct(JobService $jobService)
     {
@@ -29,9 +30,22 @@ class JobController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        $jobs = $this->jobService->paginated();
+
+
+       $jobs = $this->jobService->paginated(
+           perPage: 5,
+           relations: [
+               'company',
+               'type'
+           ]
+       );
+
+        return Inertia::render($this->componentPrefix.'/Index', [
+            'jobs' => $jobs
+        ]);
+
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',
@@ -102,8 +116,11 @@ class JobController extends Controller
      * @param Job $job
      * @return Response
      */
-    public function edit(Job $job): Response
+    public function edit(int $jobId): Response
     {
+
+        $job =$this->jobService->getByid($jobId);
+
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
