@@ -2,24 +2,53 @@
 
 namespace App\Services;
 
+use App\DataServices\Contracts\CompanyDataServiceContract;
 use App\Models\Company;
+use App\Services\Contracts\CompanyServiceContract;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
-class CompanyService
+class CompanyService implements CompanyServiceContract
 {
+    protected CompanyDataServiceContract $companyDataService;
 
-    public function list()
+    public function __construct(CompanyDataServiceContract $companyDataService)
     {
+        $this->companyDataService = $companyDataService;
     }
 
-    public function createCompany(array $data)
+    /**
+     * @inheritDoc
+     */
+    public function getById(int $companyId)
     {
+        return $this->companyDataService->getById($companyId);
     }
 
-    public function updateCompany(Company $company, array $data)
+    public function list(): Collection
     {
+        return $this->companyDataService->list();
     }
 
-    public function deleteCompany(Company $company)
+    public function paginated(?int $perPage, array $relations): LengthAwarePaginator
     {
+        return $this->companyDataService($perPage, $relations);
+    }
+
+    public function create(array $data): Company
+    {
+        return $this->companyDataService->create($data);
+    }
+
+    public function update(int $companyId, array $data): bool
+    {
+        $company = $this->getById($companyId);
+        return $this->companyDataService->update($company, $data);
+    }
+
+    public function delete(int $companyId): bool
+    {
+        $company = $this->getById($companyId);
+        return $this->companyDataService->delete($company);
     }
 }

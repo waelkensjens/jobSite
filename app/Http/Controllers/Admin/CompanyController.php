@@ -29,9 +29,9 @@ class CompanyController extends Controller
      *
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $companies = $this->companyService->list();
+        $companies = $this->companyService->paginated();
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',
@@ -64,7 +64,7 @@ class CompanyController extends Controller
      */
     public function store(StorecompanyRequest $request): Response
     {
-        $this->companyService->createCompany(
+        $this->companyService->create(
             data: $request->all()
         );
 
@@ -101,11 +101,13 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Company $company
+     * @param int $companyId
      * @return Response
      */
-    public function edit(Company $company): Response
+    public function edit(int $companyId): Response
     {
+        $company = $this->companyService->getById($companyId);
+
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
@@ -118,12 +120,12 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param company $company
+     * @param int $companyId
      * @return RedirectResponse
      */
-    public function update(Request $request, company $company): RedirectResponse
+    public function update(Request $request, int $companyId): RedirectResponse
     {
-        $this->companyService->updateCompany($company, $request->all());
+        $this->companyService->update($companyId, $request->all());
 
         return redirect()->back()->with(
             [
@@ -135,12 +137,12 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Company $company
+     * @param int $companyId
      * @return RedirectResponse
      */
-    public function destroy(company $company): RedirectResponse
+    public function destroy(int $companyId): RedirectResponse
     {
-        $this->companyService->deleteCompany($company);
+        $this->companyService->delete($company);
 
         return redirect()
             ->back()

@@ -8,6 +8,16 @@ use Illuminate\Support\Collection;
 
 interface CompanyServiceContract
 {
+
+    /**
+     * Fetch a company by id
+     *
+     * @param int $companyId
+     * @return mixed
+     */
+    public function getById(int $companyId);
+
+
     /**
      * return a list of all companies
      *

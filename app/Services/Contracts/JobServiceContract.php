@@ -8,6 +8,13 @@ use Illuminate\Support\Collection;
 
 interface JobServiceContract
 {
+    /**
+     * Fetch a job by id
+     *
+     * @param int $jobId
+     * @return Job
+     */
+    public function getById(int $jobId): Job;
 
     /**
      * return a list of all jobs
@@ -17,8 +24,10 @@ interface JobServiceContract
     public function list(): Collection;
 
     /**
-     * return a list of all jobs
+     * return a paginated list of all jobs
      *
+     * @param int|null $perPage
+     * @param array $relations
      * @return LengthAwarePaginator
      */
     public function paginated(?int $perPage, array $relations): LengthAwarePaginator;
@@ -29,7 +38,7 @@ interface JobServiceContract
      * @param array $data the data from the request
      * @return Job        The created job
      */
-    public function createJob(array $data): Job;
+    public function create(array $data): Job;
 
     /**
      * Update a given job
@@ -38,7 +47,7 @@ interface JobServiceContract
      * @param array $data The data we need to update on the job
      * @return bool
      */
-    public function updateJob(int $jobId, array $data): bool;
+    public function update(int $jobId, array $data): bool;
 
     /**
      * Delete a given job
@@ -46,5 +55,5 @@ interface JobServiceContract
      * @param int $jobId
      * @return bool
      */
-    public function deleteJob(int $jobId): bool;
+    public function delete(int $jobId): bool;
 }

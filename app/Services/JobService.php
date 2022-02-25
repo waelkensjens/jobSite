@@ -16,6 +16,13 @@ class JobService implements JobServiceContract
     {
         $this->jobDataService = $jobDataService;
     }
+    /**
+     * @inheritDoc
+     */
+    public function getById(int $jobId): Job
+    {
+        return $this->jobDataService->getById($jobId);
+    }
 
     /**
      * @inheritDoc
@@ -35,7 +42,7 @@ class JobService implements JobServiceContract
     /**
      * @inheritDoc
      */
-    public function createJob(array $data): Job
+    public function create(array $data): Job
     {
         return $this->jobDataService->create($data);
     }
@@ -43,7 +50,7 @@ class JobService implements JobServiceContract
     /**
      * @inheritDoc
      */
-    public function updateJob(int $jobId, array $data): bool
+    public function update(int $jobId, array $data): bool
     {
         $job = $this->getById($jobId);
         return $this->jobDataService->update($job, $data);
@@ -52,14 +59,9 @@ class JobService implements JobServiceContract
     /**
      * @inheritDoc
      */
-    public function deleteJob(int $jobId): bool
+    public function delete(int $jobId): bool
     {
         $job = $this->getById($jobId);
         return $this->jobDataService->delete($job);
-    }
-
-    public function getById(int $jobId)
-    {
-        return $this->jobDataService->getById($jobId);
     }
 }

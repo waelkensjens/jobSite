@@ -2,40 +2,71 @@
 
 namespace App\Services;
 
+use App\DataServices\Contracts\CityDataServiceContract;
 use App\Models\City;
+use App\Services\Contracts\CityServiceContract;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
-class CityService
+class CityService implements CityServiceContract
 {
 
+    protected CityDataServiceContract $cityDataService;
+
+    public function __construct(CityDataServiceContract $cityDataService)
+    {
+        $this->cityDataService = $cityDataService;
+    }
+
     /**
-     * @return Collection
+     * @inheritDoc
+     */
+    public function getById(int $cityId): City
+    {
+        return $this->cityDataService->getById($cityId);
+    }
+
+    /**
+     * @inheritDoc
      */
     public function list(): Collection
     {
-        return City::all();
+        return $this->cityDataService->list();
     }
 
     /**
-     * @param array $data
-     * @return City
+     * @inheritDoc
      */
-    public function createCity(array $data): City
+    public function paginated(?int $perPage, array $relations): LengthAwarePaginator
     {
-        return City::create($data);
+        return $this->cityDataService->paginated($perPage, $relations);
     }
 
     /**
-     * @param City $city
-     * @return void
+     * @inheritDoc
      */
-    public function updateCity(City $city, array $data): bool
+    public function create(array $data): City
     {
-        return $city->update($data);
+        return $this->cityDataService->create($data);
     }
 
-    public function deleteCity(City $city): bool
+    /**
+     * @inheritDoc
+     */
+    public function update(int $cityId, array $data): bool
     {
-        return $city->delete();
+        $city = $this->getById($cityId);
+
+        return $this->cityDataService->update($city, $data);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(int $cityId): bool
+    {
+        $city = $this->getById($cityId);
+
+        return $this->cityDataService->delete($city);
     }
 }

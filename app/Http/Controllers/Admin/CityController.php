@@ -64,7 +64,7 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request): Response
     {
-        $this->cityService->createCity($request->all());
+        $this->cityService->create($request->all());
 
         $cities = $this->cityService->list();
 
@@ -83,11 +83,13 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param City $city
+     * @param int $cityId
      * @return Response
      */
-    public function show(City $city): Response
+    public function show(int $cityId): Response
     {
+        $city = $this->cityService->getById($cityId);
+
         return Inertia::render(
             $this->componentPrefix.'/Detail',
             [
@@ -99,11 +101,13 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param City $city
+     * @param int $cityId
      * @return Response
      */
-    public function edit(City $city): Response
+    public function edit(int $cityId): Response
     {
+        $city = $this->cityService->getById($cityId);
+
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
@@ -116,12 +120,12 @@ class CityController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param City $city
+     * @param int $cityId
      * @return RedirectResponse
      */
-    public function update(Request $request, City $city): RedirectResponse
+    public function update(Request $request, int $cityId): RedirectResponse
     {
-        $this->cityService->updateCity($city, $request->all());
+        $this->cityService->update($cityId, $request->all());
 
         return redirect()->back()->with(
             [
@@ -136,9 +140,9 @@ class CityController extends Controller
      * @param City $city
      * @return RedirectResponse
      */
-    public function destroy(City $city): RedirectResponse
+    public function destroy(int $cityId): RedirectResponse
     {
-        $this->cityService->deleteCity($city);
+        $this->cityService->delete($cityId);
 
         return redirect()
             ->back()

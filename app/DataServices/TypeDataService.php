@@ -9,6 +9,15 @@ use Illuminate\Support\Collection;
 
 class TypeDataService implements TypeDataServiceContract
 {
+
+    /**
+     * @inheritDoc
+     */
+    public function getById(int $typeId): Type
+    {
+        return Type::find($typeId);
+    }
+
     /**
      * @inheritDoc
      */
@@ -28,7 +37,7 @@ class TypeDataService implements TypeDataServiceContract
     /**
      * @inheritDoc
      */
-    public function createType(array $data): Type
+    public function create(array $data): Type
     {
         return Type::create($data);
     }
@@ -36,7 +45,7 @@ class TypeDataService implements TypeDataServiceContract
     /**
      * @inheritDoc
      */
-    public function updateType(Type $type, array $data): bool
+    public function update(Type $type, array $data): bool
     {
         return $type->update($data);
     }
@@ -44,7 +53,7 @@ class TypeDataService implements TypeDataServiceContract
     /**
      * @inheritDoc
      */
-    public function deleteType(Type $type): bool
+    public function delete(Type $type): bool
     {
        return $type->delete();
     }

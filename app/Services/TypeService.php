@@ -16,28 +16,59 @@ class TypeService implements Contracts\TypeServiceContract
         $this->typeDataService = $typeDataService;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getById(int $typeId): Type
+    {
+        return $this->typeDataService->getById($typeId);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function list(): Collection
     {
         return $this->typeDataService->list();
     }
 
-    public function paginated(?int $perPage, array $relations): LengthAwarePaginator
-    {
-        // TODO: Implement paginated() method.
+    /**
+     * @inheritDoc
+     */
+    public function paginated(
+        $perPage = null,
+        $relations = []
+    ): LengthAwarePaginator {
+        return  $this->typeDataService->paginated($perPage, $relations);
     }
 
-    public function createType(array $data): Type
-    {
-        // TODO: Implement createType() method.
+    /**
+     * @inheritDoc
+     */
+    public function create(
+        array $data
+    ): type {
+        return $this->typeDataService->create($data);
     }
 
-    public function updateType(Type $type, array $data): bool
-    {
-        // TODO: Implement updateType() method.
+    /**
+     * @inheritDoc
+     */
+    public function update(
+        int $typeId,
+        array $data
+    ): bool {
+        $type = $this->getById($typeId);
+        return $this->typeDataService->update($type, $data);
     }
 
-    public function deleteType(Type $type): bool
-    {
-        // TODO: Implement deleteType() method.
+    /**
+     * @inheritDoc
+     */
+    public function delete(
+        int $typeId
+    ): bool {
+        $type = $this->getById($typeId);
+        return $this->typeDataService->delete($type);
     }
 }

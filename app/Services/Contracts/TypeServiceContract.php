@@ -9,6 +9,14 @@ use Illuminate\Support\Collection;
 interface TypeServiceContract
 {
     /**
+     * Fetch a type by id
+     *
+     * @param int $typeId
+     * @return mixed
+     */
+    public function getById(int $typeId);
+
+    /**
      * return a list of all Types
      *
      * @return Collection
@@ -33,27 +41,27 @@ interface TypeServiceContract
      * @param array $data the data from the request
      * @return Type        The created Type
      */
-    public function createType(
+    public function create(
         array $data
     ): Type;
 
     /**
      * Update a given Type
      *
-     * @param Type   $type The given Type to update
+     * @param int $typeId
      * @param array $data The data we need to update on the Type
      * @return bool
      */
-    public function updateType(
-        Type $type,
+    public function update(
+        int $typeId,
         array $data
     ): bool;
 
     /**
      * Delete a given Type
      *
-     * @param Type $type
+     * @param int $typeId
      * @return bool
      */
-    public function deleteType(Type $type): bool;
+    public function delete(int $typeId): bool;
 }
