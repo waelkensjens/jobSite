@@ -29,9 +29,9 @@ class CompanyController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        $companies = $this->companyService->paginated();
+        $companies = $this->companyService->paginated(5, ['city']);
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',

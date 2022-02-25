@@ -75,7 +75,7 @@ class CityController extends Controller
             ]
         )->with(
             [
-                'message' => 'city was succesfully created'
+                'message' => 'city was successfully created'
             ]
         );
     }

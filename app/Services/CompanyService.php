@@ -32,7 +32,7 @@ class CompanyService implements CompanyServiceContract
 
     public function paginated(?int $perPage, array $relations): LengthAwarePaginator
     {
-        return $this->companyDataService($perPage, $relations);
+        return $this->companyDataService->paginated($perPage, $relations);
     }
 
     public function create(array $data): Company
