@@ -2,38 +2,52 @@
 
 namespace App\DataServices;
 
-use App\DataServices\Contracts\Company;
+use App\Models\Company;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class CompanyDataService implements Contracts\CompanyDataServiceContract
 {
-
-    public function getById(int $companyId)
+    /**
+     * @inheritDoc
+     */
+    public function getById(int $companyId): Company
     {
-        // TODO: Implement getById() method.
+        return Company::find($companyId);
     }
-
-    public function list()
+    /**
+     * @inheritDoc
+     */
+    public function list(): Collection
     {
-        // TODO: Implement list() method.
+        return Company::all();
     }
-
-    public function paginated(?int $perPage = null, array $relations = [])
+    /**
+     * @inheritDoc
+     */
+    public function paginated(?int $perPage = null, array $relations = []): LengthAwarePaginator
     {
-        // TODO: Implement paginated() method.
+        return Company::with($relations)->paginate($perPage);
     }
-
+    /**
+     * @inheritDoc
+     */
     public function create(array $data): Company
     {
-        // TODO: Implement create() method.
+        return Company::create($data);
     }
-
-    public function update(Company $company, array $data)
+    /**
+     * @inheritDoc
+     */
+    public function update(Company $company, array $data): bool
     {
-        // TODO: Implement update() method.
+        return $company->update($data);
     }
-
+    /**
+     * @inheritDoc
+     */
     public function delete(Company $company): bool
     {
-        // TODO: Implement delete() method.
+        return $company->delete();
     }
 }

@@ -2,25 +2,59 @@
 
 namespace App\DataServices\Contracts;
 
+use App\Models\Company;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+
 interface CompanyDataServiceContract
 {
-    public function getById(int $companyId);
+    /**
+     * Fetch a company by id
+     *
+     * @param int $companyId
+     * @return Company
+     */
+    public function getById(int $companyId): Company;
 
-
-
-    public function list();
-
-    public function paginated(?int $perPage = null, array $relations = []);
 
     /**
-     * Create a Job
+     * return a list of companies
+     *
+     * @return Collection
+     */
+    public function list(): Collection;
+
+    /**
+     * return a paginated list of companies
+     *
+     * @param int|null $perPage
+     * @param array $relations
+     * @return LengthAwarePaginator
+     */
+    public function paginated(?int $perPage = null, array $relations = []): LengthAwarePaginator;
+
+    /**
+     * Create a Company
      *
      * @param array $data
      * @return Company
      */
     public function create(array $data): Company;
 
-    public function update(Company $company, array $data);
+    /**
+     * update a given company
+     *
+     * @param Company $company
+     * @param array $data
+     * @return bool
+     */
+    public function update(Company $company, array $data): bool;
 
+    /**
+     * Delete a given company
+     *
+     * @param Company $company
+     * @return bool
+     */
     public function delete(Company $company): bool;
 }

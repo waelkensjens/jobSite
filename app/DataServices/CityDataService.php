@@ -3,37 +3,52 @@
 namespace App\DataServices;
 
 use App\Models\City;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class CityDataService implements Contracts\CityDataServiceContract
 {
 
-    public function getById(int $cityId)
+    /**
+     * @inheritDoc
+     */
+    public function getById(int $cityId): City
     {
-        // TODO: Implement getById() method.
+        return City::find($cityId);
     }
-
-    public function list()
+    /**
+     * @inheritDoc
+     */
+    public function list(): Collection
     {
-        // TODO: Implement list() method.
+        return City::all();
     }
-
-    public function paginated(?int $perPage = null, array $relations = [])
+    /**
+     * @inheritDoc
+     */
+    public function paginated(?int $perPage = null, array $relations = []): LengthAwarePaginator
     {
-        // TODO: Implement paginated() method.
+        return City::with($relations)->paginate($perPage);
     }
-
+    /**
+     * @inheritDoc
+     */
     public function create(array $data): City
     {
-        // TODO: Implement create() method.
+        return City::create($data);
     }
-
-    public function update(City $city, array $data)
+    /**
+     * @inheritDoc
+     */
+    public function update(City $city, array $data): bool
     {
-        // TODO: Implement update() method.
+        return $city->update($data);
     }
-
+    /**
+     * @inheritDoc
+     */
     public function delete(City $city): bool
     {
-        // TODO: Implement delete() method.
+        return $city->delete();
     }
 }
