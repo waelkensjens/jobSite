@@ -4,6 +4,7 @@ import { InertiaProgress } from "@inertiajs/progress";
 
 import { ZiggyVue } from "ziggy";
 import { Ziggy } from "./ziggy";
+import VueSweetalert2 from "vue-sweetalert2";
 
 InertiaProgress.init();
 
@@ -15,6 +16,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .use(VueSweetalert2)
             .component("Link", Link)
             .component("Head", Head)
             .mixin({ methods: { route } })

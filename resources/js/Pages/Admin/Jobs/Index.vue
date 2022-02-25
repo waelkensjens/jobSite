@@ -14,8 +14,9 @@
                 <thead>
                 <tr class="text-left font-bold">
                     <th class="pb-4 pt-6 px-6">Name</th>
-                    <th class="pb-4 pt-6 px-6">City</th>
-                    <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
+                    <th class="pb-4 pt-6 px-6">Company</th>
+                    <th class="pb-4 pt-6 px-6" >Type</th>
+                    <th class="pb-4 pt-6 px-6" >Active</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,9 +37,9 @@
                             {{ job.type?.title }}
                         </Link>
                     </td>
-                    <td class="w-px border-t">
-                        <Link class="flex items-center px-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
+                            {{ job.is_active? 'Active' : 'inactive' }}
                         </Link>
                     </td>
                 </tr>

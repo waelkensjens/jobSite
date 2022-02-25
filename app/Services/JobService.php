@@ -51,9 +51,10 @@ class JobService implements JobServiceContract
     /**
      * @inheritDoc
      */
-    public function deleteJob(Job $job): bool
+    public function deleteJob(int $jobId): bool
     {
-        // TODO: Implement deleteJob() method.
+        $job = $this->getById($jobId);
+        return $this->jobDataService->delete($job);
     }
 
     public function getById(int $jobId)

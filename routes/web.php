@@ -39,6 +39,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/',[JobController::class, 'show'])->name('admin.jobs.show');
             Route::get('/edit',[JobController::class, 'edit'])->name('admin.jobs.edit');
             Route::post('/update',[JobController::class, 'update'])->name('admin.jobs.update');
+            Route::delete('/delete',[JobController::class, 'destroy'])->name('admin.jobs.destroy');
         });
 
     });

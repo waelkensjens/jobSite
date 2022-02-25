@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
 use App\Models\Job;
-use App\Services\JobService;
+use App\Services\Contracts\JobServiceContract;
+use App\Services\Contracts\TypeServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +18,15 @@ class JobController extends Controller
 {
 
     protected string $componentPrefix;
-    private JobService $jobService;
+    protected JobServiceContract $jobService;
+    protected TypeServiceContract $typeService;
 
-    public function __construct(JobService $jobService)
-    {
+    public function __construct(
+        JobServiceContract $jobService,
+        TypeServiceContract $typeService
+    ) {
         $this->jobService = $jobService;
+        $this->typeService = $typeService;
         $this->componentPrefix = 'Admin/Jobs';
     }
 
@@ -113,18 +118,20 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Job $job
+     * @param int $jobId
      * @return Response
      */
     public function edit(int $jobId): Response
     {
-
         $job =$this->jobService->getByid($jobId);
+
+        $types = $this->typeService->list();
 
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
-                'job' => $job
+                'job' => $job,
+                'types' => $types
             ]
         );
     }
@@ -153,12 +160,12 @@ class JobController extends Controller
      * @param Job $job
      * @return RedirectResponse
      */
-    public function destroy(Job $job): RedirectResponse
+    public function destroy(int $jobId): RedirectResponse
     {
-        $this->jobService->deleteJob($job);
+        $this->jobService->deleteJob($jobId);
 
         return redirect()
-            ->back()
+            ->route('admin.jobs.index')
             ->with(
                 [
                     "message" => 'Job successfully deleted'

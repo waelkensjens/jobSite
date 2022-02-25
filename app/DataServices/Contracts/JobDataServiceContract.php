@@ -20,4 +20,6 @@ interface JobDataServiceContract
     public function paginated(?int $perPage = null, array $relations = []);
 
     public function getById(int $jobId);
+
+    public function delete(Job $job): bool;
 }

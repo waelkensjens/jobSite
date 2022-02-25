@@ -27,4 +27,9 @@ class JobDataService implements Contracts\JobDataServiceContract
     {
         return Job::find($jobId);
     }
+
+    public function delete(Job $job): bool
+    {
+        return $job->delete();
+    }
 }

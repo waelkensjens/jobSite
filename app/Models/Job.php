@@ -13,6 +13,11 @@ class Job extends Model
 
     protected $guarded = [];
 
+    protected $with = [
+        'company',
+        'type'
+    ];
+
     /**
      * Company relation a job belongs to a company
      *

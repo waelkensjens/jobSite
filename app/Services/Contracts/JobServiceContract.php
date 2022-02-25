@@ -43,8 +43,8 @@ interface JobServiceContract
     /**
      * Delete a given job
      *
-     * @param Job $job
+     * @param int $jobId
      * @return bool
      */
-    public function deleteJob(Job $job): bool;
+    public function deleteJob(int $jobId): bool;
 }
