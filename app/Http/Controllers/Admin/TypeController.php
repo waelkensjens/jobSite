@@ -22,7 +22,7 @@ class TypeController extends Controller
     public function __construct(TypeService $typeService)
     {
         $this->typeService = $typeService;
-        $componentPrefix = 'Admin/Types';
+        $this->componentPrefix = 'Admin/Types';
     }
 
     /**
@@ -35,7 +35,7 @@ class TypeController extends Controller
         $types = $this->typeService->list();
 
         return Inertia::render(
-            component: $this->componentPrefix.'/index',
+            component: $this->componentPrefix.'/Index',
             props: [
                 'types' => $types
             ]

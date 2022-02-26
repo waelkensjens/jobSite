@@ -2,12 +2,17 @@
     <div>
         <Head title="jobs" />
         <h1 class="mb-8 text-3xl font-bold">jobs</h1>
-        <div class="flex items-center justify-between mb-6">
-
-            <Link class="btn-indigo" :href="route('admin.jobs.create')">
-                <span>Create</span>
-                <span class="hidden md:inline">&nbsp;job</span>
-            </Link>
+        <div class="px-4 py-3 text-right sm:px-6">
+            <button
+                @click="createNew"
+                class="inline-flex justify-center
+                                py-2 px-4 border border-transparent shadow-sm
+                                text-sm font-medium rounded-md text-white bg-indigo-600
+                                hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                focus:ring-indigo-500"
+            >
+                Add new
+            </button>
         </div>
         <div class="bg-white rounded-md shadow overflow-x-auto">
             <table class="w-full whitespace-nowrap">
@@ -92,10 +97,15 @@ export default {
 </script>
 <script setup>
 
+import {Inertia} from "@inertiajs/inertia";
+
 const props = defineProps(
     {jobs: Object}
 )
 
+const createNew = () => {
+    Inertia.get(route('admin.jobs.create'))
+}
 
 </script>
 <style scoped>
