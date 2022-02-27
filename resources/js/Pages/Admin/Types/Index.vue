@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Head title="jobs" />
-        <h1 class="mb-8 text-3xl font-bold">jobs</h1>
+        <Head title="types" />
+        <h1 class="mb-8 text-3xl font-bold">types</h1>
         <div class="px-4 py-3 text-right sm:px-6">
             <button
                 @click="createNew"
@@ -18,43 +18,30 @@
             <table class="w-full whitespace-nowrap">
                 <thead>
                 <tr class="text-left font-bold">
-                    <th class="pb-4 pt-6 px-6">Name</th>
-                    <th class="pb-4 pt-6 px-6">Company</th>
-                    <th class="pb-4 pt-6 px-6" >Type</th>
-                    <th class="pb-4 pt-6 px-6" >Active</th>
+                    <th class="pb-4 pt-6 px-6">title</th>
+                    <th class="pb-4 pt-6 px-6">created</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="job in jobs.data" :key="job.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                <tr v-for="type in types.data" :key="type.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.jobs.edit', {jobId: job.id})">
-                            {{ job.title }}
-                            <icon v-if="job.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.types.edit', {typeId: type.id})">
+                            {{ type.title }}
                         </Link>
                     </td>
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            {{ job.company.name }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            {{ job.type?.title }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            {{ job.is_active? 'Active' : 'inactive' }}
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.types.edit', {typeId: type.id})" tabindex="-1">
+                            {{ Date(type.created_at) }}
                         </Link>
                     </td>
                 </tr>
-                <tr v-if="jobs.data.length === 0">
-                    <td class="px-6 py-4 border-t" colspan="4">No jobs found.</td>
+                <tr v-if="types.data.length === 0">
+                    <td class="px-6 py-4 border-t" colspan="4">No types found.</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <pagination class="mt-6" :links="jobs.links" />
+        <pagination class="mt-6" :links="types.links" />
     </div>
 </template>
 <script>
@@ -100,11 +87,11 @@ export default {
 import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps(
-    {jobs: Object}
+    {types: Object}
 )
 
 const createNew = () => {
-    Inertia.get(route('admin.jobs.create'))
+    Inertia.get(route('admin.types.create'))
 }
 
 </script>

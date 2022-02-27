@@ -32,7 +32,7 @@ class TypeController extends Controller
      */
     public function index(): Response
     {
-        $types = $this->typeService->list();
+        $types = $this->typeService->paginated();
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',
@@ -61,22 +61,17 @@ class TypeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreTypeRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(StoreTypeRequest $request): Response
+    public function store(StoreTypeRequest $request): RedirectResponse
     {
-        $this->typeService->createType($request->all());
+        $this->typeService->create($request->all());
 
-        $types = $this->typeService->list();
-
-        return Inertia::render(
-            $this->componentPrefix.'/Index',
-            [
-                'types' => $types
-            ]
+        return redirect()->to(
+            route('admin.types.index')
         )->with(
             [
-                'message' => 'type was succesfully created'
+                'success' => 'type was succesfully created'
             ]
         );
     }
@@ -100,11 +95,13 @@ class TypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Type $type
+     * @param int $typeId
      * @return Response
      */
-    public function edit(Type $type): Response
+    public function edit(int $typeId): Response
     {
+        $type = $this->typeService->getById($typeId);
+
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
@@ -117,16 +114,19 @@ class TypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Type $type
+     * @param int $typeId
      * @return RedirectResponse
      */
-    public function update(Request $request, Type $type): RedirectResponse
+    public function update(Request $request, int $typeId): RedirectResponse
     {
-        $this->typeService->updateType($type);
+        $this->typeService->update(
+            $typeId,
+            $request->all()
+        );
 
         return redirect()->back()->with(
             [
-                "message" => 'City successfully updated'
+                "success" => 'City successfully updated'
             ]
         );
     }
@@ -134,18 +134,18 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Type $type
+     * @param int $typeId
      * @return RedirectResponse
      */
-    public function destroy(Type $type): RedirectResponse
+    public function destroy(int $typeId): RedirectResponse
     {
-        $this->typeService->deleteType($type);
+        $this->typeService->delete($typeId);
 
         return redirect()
             ->route('admin.types.index')
             ->with(
                 [
-                    "message" => 'type successfully deleted'
+                    "success" => 'type successfully deleted'
                 ]
             );
     }

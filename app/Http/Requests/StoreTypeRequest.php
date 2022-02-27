@@ -13,7 +13,7 @@ class StoreTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class StoreTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'string|unique:types'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.unique' => 'a Type with this title already exists'
         ];
     }
 }
