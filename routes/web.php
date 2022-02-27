@@ -53,6 +53,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/',[CompanyController::class, 'show'])->name('admin.companies.show');
             Route::get('/edit',[CompanyController::class, 'edit'])->name('admin.companies.edit');
             Route::post('/update',[CompanyController::class, 'update'])->name('admin.companies.update');
+            Route::delete('/delete',[CompanyController::class, 'destroy'])->name('admin.companies.destroy');
+
         });
 
     });
@@ -66,6 +68,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/',[CityController::class, 'show'])->name('admin.cities.show');
             Route::get('/edit',[CityController::class, 'edit'])->name('admin.cities.edit');
             Route::post('/update',[CityController::class, 'update'])->name('admin.cities.update');
+            Route::delete('/delete',[CityController::class, 'destroy'])->name('admin.cities.destroy');
+
         });
     });
 
@@ -79,6 +83,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/',[TypeController::class, 'show'])->name('admin.types.show');
             Route::get('/edit',[TypeController::class, 'edit'])->name('admin.types.edit');
             Route::post('/update',[TypeController::class, 'update'])->name('admin.types.update');
+            Route::delete('/delete',[TypeController::class, 'destroy'])->name('admin.types.destroy');
         });
     });
 

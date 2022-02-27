@@ -1,8 +1,19 @@
 <template>
 
-    <h1 class="text-3xl">Create New city</h1>
+    <h1 class="text-3xl">Edit city</h1>
 
-    <div class="mt-8 sm:mx-auto sm:w-full w-full">
+    <div class="text-right float-right mb-10 pb-10">
+    <button
+        @click="deleteCity"
+        type="submit" class="w-90 flex justify-center
+                             py-2 px-4 border border-transparent
+                              rounded-md shadow-sm text-sm font-medium text-white
+                     bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2
+                      focus:ring-offset-2 focus:ring-indigo-500">
+        Delete
+    </button>
+    </div>
+    <div class="pt-6 mt-8 sm:mx-auto sm:w-full w-full">
         <div class="bg-white py-8 px-6 border border-gray-300 shadow rounded-lg sm:px-10">
             <form
                 @submit.prevent="submit"
@@ -58,6 +69,7 @@ import * as yup from "yup";
 import {useField, useForm} from "vee-validate";
 import {Inertia} from "@inertiajs/inertia";
 import {boolean} from "yup";
+import Swal from "sweetalert2";
 
 
 const props = defineProps({
@@ -95,5 +107,21 @@ const submit = handleSubmit((values) => {
         zip:values.zip
     })
 })
+
+const deleteCity = () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result) {
+           Inertia.delete(route('admin.cities.destroy', { cityId: props.city.id}))
+        }
+    })
+}
 
 </script>

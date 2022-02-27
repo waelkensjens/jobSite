@@ -21,7 +21,7 @@ class CityService implements CityServiceContract
     /**
      * @inheritDoc
      */
-    public function getById(int $cityId): City
+    public function getById(int $cityId): ?City
     {
         return $this->cityDataService->getById($cityId);
     }

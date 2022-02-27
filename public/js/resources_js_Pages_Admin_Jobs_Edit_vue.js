@@ -21,7 +21,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var __default__ = {
   name: "Edit",
   layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -123,8 +122,7 @@ var __default__ = {
       yup: yup__WEBPACK_IMPORTED_MODULE_0__,
       useField: vee_validate__WEBPACK_IMPORTED_MODULE_4__.useField,
       useForm: vee_validate__WEBPACK_IMPORTED_MODULE_4__.useForm,
-      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
-      "boolean": yup__WEBPACK_IMPORTED_MODULE_0__.boolean
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

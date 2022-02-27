@@ -12,9 +12,9 @@ interface CityDataServiceContract
      * Get a city by its id
      *
      * @param int $cityId
-     * @return City
+     * @return City|null
      */
-    public function getById(int $cityId): City;
+    public function getById(int $cityId): ?City;
 
     /**
      * return a list of cities

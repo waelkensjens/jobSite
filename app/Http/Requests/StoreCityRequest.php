@@ -13,7 +13,7 @@ class StoreCityRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class StoreCityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'zip' => 'required|string|unique:cities'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+           'zip.unique' => 'a city with this zip code was already created'
         ];
     }
 }

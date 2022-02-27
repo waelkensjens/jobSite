@@ -12,10 +12,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
-/* harmony import */ var _vueform_toggle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vueform/toggle */ "./node_modules/@vueform/toggle/dist/toggle.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+/* harmony import */ var _vueform_toggle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vueform/toggle */ "./node_modules/@vueform/toggle/dist/toggle.js");
+
 
 
 
@@ -24,9 +27,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var __default__ = {
   name: "Edit",
-  layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_2__["default"],
+  layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_3__["default"],
   components: {
-    Toggle: _vueform_toggle__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Toggle: _vueform_toggle__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/Object.assign(__default__, {
@@ -44,18 +47,18 @@ var __default__ = {
       zip: yup__WEBPACK_IMPORTED_MODULE_0__.number().required()
     });
 
-    var _useForm = (0,vee_validate__WEBPACK_IMPORTED_MODULE_4__.useForm)({
+    var _useForm = (0,vee_validate__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       validationSchema: schema
     }),
         handleSubmit = _useForm.handleSubmit;
 
-    var _useField = (0,vee_validate__WEBPACK_IMPORTED_MODULE_4__.useField)('name', null, {
+    var _useField = (0,vee_validate__WEBPACK_IMPORTED_MODULE_5__.useField)('name', null, {
       initialValue: props.city.name
     }),
         name = _useField.value,
         nameError = _useField.errorMessage;
 
-    var _useField2 = (0,vee_validate__WEBPACK_IMPORTED_MODULE_4__.useField)('zip', null, {
+    var _useField2 = (0,vee_validate__WEBPACK_IMPORTED_MODULE_5__.useField)('zip', null, {
       initialValue: props.city.zip
     }),
         zip = _useField2.value,
@@ -69,6 +72,25 @@ var __default__ = {
         zip: values.zip
       });
     });
+
+    var deleteCity = function deleteCity() {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result) {
+          _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia["delete"](route('admin.cities.destroy', {
+            cityId: props.city.id
+          }));
+        }
+      });
+    };
+
     var __returned__ = {
       props: props,
       schema: schema,
@@ -78,13 +100,15 @@ var __default__ = {
       zip: zip,
       zipError: zipError,
       submit: submit,
-      Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_2__["default"],
-      Toggle: _vueform_toggle__WEBPACK_IMPORTED_MODULE_3__["default"],
+      deleteCity: deleteCity,
+      Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_3__["default"],
+      Toggle: _vueform_toggle__WEBPACK_IMPORTED_MODULE_4__["default"],
       yup: yup__WEBPACK_IMPORTED_MODULE_0__,
-      useField: vee_validate__WEBPACK_IMPORTED_MODULE_4__.useField,
-      useForm: vee_validate__WEBPACK_IMPORTED_MODULE_4__.useForm,
+      useField: vee_validate__WEBPACK_IMPORTED_MODULE_5__.useField,
+      useForm: vee_validate__WEBPACK_IMPORTED_MODULE_5__.useForm,
       Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
-      "boolean": yup__WEBPACK_IMPORTED_MODULE_0__.boolean
+      "boolean": yup__WEBPACK_IMPORTED_MODULE_0__.boolean,
+      Swal: (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -299,12 +323,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
   "class": "text-3xl"
-}, "Create New city", -1
+}, "Edit city", -1
 /* HOISTED */
 );
 
 var _hoisted_2 = {
-  "class": "mt-8 sm:mx-auto sm:w-full w-full"
+  "class": "pt-6 mt-8 sm:mx-auto sm:w-full w-full"
 };
 var _hoisted_3 = {
   "class": "bg-white py-8 px-6 border border-gray-300 shadow rounded-lg sm:px-10"
@@ -348,7 +372,13 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "text-right float-right mb-10 pb-10"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: $setup.deleteCity,
+    type: "submit",
+    "class": "w-90 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  }, " Delete ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.submit && $setup.submit.apply($setup, arguments);
     }, ["prevent"])),

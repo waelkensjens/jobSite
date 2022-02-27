@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\DataServices\Contracts\CityDataServiceContract;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class importCities extends Command
 {
@@ -34,7 +35,8 @@ class importCities extends Command
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return void
+     * @throws BindingResolutionException
      */
     public function handle()
     {

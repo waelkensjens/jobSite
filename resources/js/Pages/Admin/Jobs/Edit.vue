@@ -105,7 +105,6 @@ export default {
 import * as yup from "yup";
 import {useField, useForm} from "vee-validate";
 import {Inertia} from "@inertiajs/inertia";
-import {boolean} from "yup";
 
 
 const props = defineProps({

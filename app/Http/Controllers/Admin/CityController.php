@@ -75,7 +75,7 @@ class CityController extends Controller
             ]
         )->with(
             [
-                'message' => 'city was successfully created'
+                'success' => 'city was successfully created'
             ]
         );
     }
@@ -129,7 +129,7 @@ class CityController extends Controller
 
         return redirect()->back()->with(
             [
-                "message" => 'City successfully updated'
+                "success" => 'City successfully updated'
             ]
         );
     }
@@ -137,7 +137,7 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param City $city
+     * @param int $cityId
      * @return RedirectResponse
      */
     public function destroy(int $cityId): RedirectResponse
@@ -145,10 +145,10 @@ class CityController extends Controller
         $this->cityService->delete($cityId);
 
         return redirect()
-            ->back()
+            ->to(route('admin.cities.index'))
             ->with(
                 [
-                    "message" => 'city successfully deleted'
+                    "success" => 'city successfully deleted'
                 ]
             );
     }

@@ -12,7 +12,7 @@ class CityDataService implements Contracts\CityDataServiceContract
     /**
      * @inheritDoc
      */
-    public function getById(int $cityId): City
+    public function getById(int $cityId): ?City
     {
         return City::find($cityId);
     }
