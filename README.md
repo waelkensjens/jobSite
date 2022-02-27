@@ -22,23 +22,23 @@ Maak gebruik van:
 ## installation
 
 
-`git clone https://github.com/waelkensjens/jobSite.git`
+> git clone https://github.com/waelkensjens/jobSite.git
 
-`composer install`
+> composer install
 
-`npm install && npm run dev`
+> npm install && npm run dev 
 
-`npx mix`
+> npx mix 
 
-`php artisan migrate --seed`
+> php artisan migrate --seed 
 
 if wanted 
 
-`php artisan cities:import`
+> php artisan cities:import 
 
-`php artisan serve`
+> php artisan serve 
 
-`yarn watch`
+> yarn watch 
 
 
 ## Time spent
