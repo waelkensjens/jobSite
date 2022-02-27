@@ -50,7 +50,7 @@ class TypeController extends Controller
     public function create(): Response
     {
         return Inertia::render(
-            component: $this->componentPrefix.'/create',
+            component: $this->componentPrefix.'/Create',
             props: [
 
             ]

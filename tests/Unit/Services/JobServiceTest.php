@@ -2,8 +2,6 @@
 
 namespace Services;
 
-use App\Models\Company;
-use App\Models\Type;
 use App\Services\Contracts\JobServiceContract;
 use App\Services\JobService;
 use Tests\TestCase;
@@ -16,7 +14,7 @@ class JobServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->jobService = app(JobService::class);
+        $this->jobService = app(JobServiceContract::class);
 
         $this->jobData = [
             'title' => 'Laravel(php) developer',

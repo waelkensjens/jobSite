@@ -31,7 +31,7 @@ class CityController extends Controller
      */
     public function index(): Response
     {
-        $cities = $this->cityService->list();
+        $cities = $this->cityService->paginated(5, []);
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',

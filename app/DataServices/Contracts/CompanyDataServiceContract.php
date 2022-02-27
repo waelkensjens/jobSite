@@ -57,4 +57,12 @@ interface CompanyDataServiceContract
      * @return bool
      */
     public function delete(Company $company): bool;
+
+    /**
+     * Fetch a company by name
+     *
+     * @param string $name
+     * @return Company|null
+     */
+    public function getByName(string $name): ?Company;
 }

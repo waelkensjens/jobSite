@@ -1,55 +1,48 @@
 <template>
     <div>
-        <Head title="jobs" />
-        <h1 class="mb-8 text-3xl font-bold">companies</h1>
-        <div class="flex items-center justify-between mb-6">
-
-            <Link class="btn-indigo" :href="route('admin.companies.create')">
-                <span>Create</span>
-                <span class="hidden md:inline">&nbsp;company</span>
-            </Link>
+        <Head title="cities" />
+        <h1 class="mb-8 text-3xl font-bold">cities</h1>
+        <div class="px-4 py-3 text-right sm:px-6">
+            <button
+                @click="createNew"
+                class="inline-flex justify-center
+                                py-2 px-4 border border-transparent shadow-sm
+                                text-sm font-medium rounded-md text-white bg-indigo-600
+                                hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                focus:ring-indigo-500"
+            >
+                Add new
+            </button>
         </div>
         <div class="bg-white rounded-md shadow overflow-x-auto">
             <table class="w-full whitespace-nowrap">
                 <thead>
                 <tr class="text-left font-bold">
-                    <th class="pb-4 pt-6 px-6">Name</th>
-                    <th class="pb-4 pt-6 px-6">Company</th>
-                    <th class="pb-4 pt-6 px-6" >Type</th>
-                    <th class="pb-4 pt-6 px-6" >Active</th>
+                    <th class="pb-4 pt-6 px-6">name</th>
+                    <th class="pb-4 pt-6 px-6">Zip</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="company in companies.data" :key="company.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                <tr v-for="city in cities.data" :key="city.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.companies.edit', {companyId: company.id})">
-                            {{ company.title }}
-                            <icon v-if="company.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.cities.edit', {cityId: city.id})">
+                            {{ city.name }}
+                            <icon v-if="city.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
                         </Link>
                     </td>
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
-                            {{ company.name }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
-                            {{ company.type?.title }}
-                        </Link>
-                    </td>
-                    <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
-                            {{ company.is_active? 'Active' : 'inactive' }}
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.cities.edit', {cityId: city.id})" tabindex="-1">
+                            {{ city.zip }}
                         </Link>
                     </td>
                 </tr>
-                <tr v-if="companies.data.length === 0">
-                    <td class="px-6 py-4 border-t" colspan="4">No companies found.</td>
+                <tr v-if="cities.data.length === 0">
+                    <td class="px-6 py-4 border-t" colspan="4">No cities found.</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <pagination class="mt-6" :links="companies.links" />
+        <pagination class="mt-6" :links="cities.links" />
     </div>
 </template>
 <script>
@@ -92,10 +85,15 @@ export default {
 </script>
 <script setup>
 
+import {Inertia} from "@inertiajs/inertia";
+
 const props = defineProps(
-    {companies: Object}
+    {cities: Object}
 )
 
+const createNew = () => {
+    Inertia.get(route('admin.cities.create'))
+}
 
 </script>
 <style scoped>

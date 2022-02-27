@@ -50,4 +50,12 @@ class CompanyDataService implements Contracts\CompanyDataServiceContract
     {
         return $company->delete();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getByName(string $name): ?Company
+    {
+        return Company::where('name', $name)->first();
+    }
 }

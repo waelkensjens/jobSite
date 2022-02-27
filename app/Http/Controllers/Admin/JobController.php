@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
 use App\Models\Job;
+use App\Services\Contracts\CompanyServiceContract;
 use App\Services\Contracts\JobServiceContract;
 use App\Services\Contracts\TypeServiceContract;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -20,13 +23,16 @@ class JobController extends Controller
     protected string $componentPrefix;
     protected JobServiceContract $jobService;
     protected TypeServiceContract $typeService;
+    protected CompanyServiceContract $companyService;
 
     public function __construct(
         JobServiceContract $jobService,
-        TypeServiceContract $typeService
+        TypeServiceContract $typeService,
+        CompanyServiceContract $companyService,
     ) {
         $this->jobService = $jobService;
         $this->typeService = $typeService;
+        $this->companyService = $companyService;
         $this->componentPrefix = 'Admin/Jobs';
     }
 
@@ -37,20 +43,13 @@ class JobController extends Controller
      */
     public function index(): Response
     {
-
-
-       $jobs = $this->jobService->paginated(
+        $jobs = $this->jobService->paginated(
            perPage: 5,
            relations: [
                'company',
                'type'
            ]
        );
-
-        return Inertia::render($this->componentPrefix.'/Index', [
-            'jobs' => $jobs
-        ]);
-
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',
@@ -67,10 +66,14 @@ class JobController extends Controller
      */
     public function create(): Response
     {
+        $types = $this->typeService->list();
+        $companies = $this->companyService->list();
+
         return Inertia::render(
             component: $this->componentPrefix.'/Create',
             props: [
-
+                'types' => $types,
+                'companies' => $companies
             ]
         );
     }
@@ -79,22 +82,19 @@ class JobController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreJobRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(StoreJobRequest $request): Response
+    public function store(StoreJobRequest $request): RedirectResponse
     {
-        $this->jobService->createJob($request->all());
+        $this->jobService->create(
+            data: $request->all()
+        );
 
-        $jobs = $this->jobService->list();
-
-        return Inertia::render(
-            $this->componentPrefix.'/Index',
-            [
-                'jobs' => $jobs
-            ]
+        return redirect(
+            route('admin.jobs.index')
         )->with(
             [
-                'message' => 'Job was succesfully created'
+                'success' => 'Job was successfully created'
             ]
         );
     }
@@ -123,15 +123,19 @@ class JobController extends Controller
      */
     public function edit(int $jobId): Response
     {
-        $job =$this->jobService->getByid($jobId);
+        $job =$this->jobService->getByid(
+           jobId:  $jobId
+        );
 
         $types = $this->typeService->list();
+        $companies = $this->companyService->list();
 
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
                 'job' => $job,
-                'types' => $types
+                'types' => $types,
+                'companies' => $companies,
             ]
         );
     }
@@ -140,16 +144,19 @@ class JobController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Job $job
+     * @param int $jobId
      * @return RedirectResponse
      */
-    public function update(Request $request, Job $job): RedirectResponse
+    public function update(Request $request, int $jobId): RedirectResponse
     {
-        $this->jobService->updateJob($job);
+        $this->jobService->update(
+           jobId: $jobId,
+           data: $request->all()
+        );
 
         return redirect()->back()->with(
             [
-                "message" => 'Job successfully updated'
+                "success" => 'Job successfully updated'
             ]
         );
     }
@@ -157,12 +164,14 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Job $job
+     * @param int $jobId
      * @return RedirectResponse
      */
     public function destroy(int $jobId): RedirectResponse
     {
-        $this->jobService->deleteJob($jobId);
+        $this->jobService->delete(
+            jobId: $jobId
+        );
 
         return redirect()
             ->route('admin.jobs.index')

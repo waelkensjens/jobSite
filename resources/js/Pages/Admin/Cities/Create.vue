@@ -1,91 +1,196 @@
 <template>
 
-    <div>
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-            <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="#" method="POST">
-                    <div class="shadow sm:rounded-md sm:overflow-hidden">
-                        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                            <div class="grid grid-cols-3 gap-6">
-                                <div class="col-span-3 sm:col-span-2">
-                                    <label for="company-website" class="block text-sm font-medium text-gray-700"> Website </label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> http:// </span>
-                                        <input type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com">
-                                    </div>
-                                </div>
-                            </div>
+    <h1 class="text-3xl">Create New Job</h1>
 
-                            <div>
-                                <label for="about" class="block text-sm font-medium text-gray-700"> About </label>
-                                <div class="mt-1">
-                                    <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="you@example.com"></textarea>
-                                </div>
-                                <p class="mt-2 text-sm text-gray-500">Brief description for your profile. URLs are hyperlinked.</p>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700"> Photo </label>
-                                <div class="mt-1 flex items-center">
-                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-                                    <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Change</button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700"> Cover photo </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                    <div class="space-y-1 text-center">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                                <span>Upload a file</span>
-                                                <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                                            </label>
-                                            <p class="pl-1">or drag and drop</p>
-                                        </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
-                        </div>
+    <div class="mt-8 sm:mx-auto sm:w-full w-full">
+        <div class="bg-white py-8 px-6 border border-gray-300 shadow rounded-lg sm:px-10">
+            <form
+                @submit.prevent="submit"
+                class="mb-0 space-y-6" >
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">title</label>
+                    <div class="mt-1 w-2/4">
+                        <input
+                            v-model="title"
+                            id="title" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="titleError" class="text-sm text-red-600">{{ titleError }}</span>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <div class="mt-1 w-2/4">
+                        <input
+                            v-model="description"
+                            id="description" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="descriptionError" class="text-sm text-red-600">{{ descriptionError }}</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                    <div class="mt-1 w-2/4">
+                        <input
+                            v-model="content"
+                            id="content" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="contentError" class="text-sm text-red-600">{{ contentError }}</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <input id="existing" v-model="existing" name="terms-and-privacy" type="checkbox" class="" />
+                    <label for="existing" class="ml-2 block text-sm text-gray-900"
+                    >use existing company?
+                    </label>
+                </div>
+
+
+                <div v-if="!existing">
+                    <label for="content" class="block text-sm font-medium text-gray-700">Company name</label>
+                    <div class="mt-1 w-2/4">
+                        <input
+                            v-model="newCompany"
+                            id="newCompany" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="newCompanyError" class="text-sm text-red-600">{{ newCompanyError }}</span>
+                    </div>
+                </div>
+
+                <div v-else>
+                    <label for="company" class="block text-sm font-medium">Company</label>
+                    <div class="mt-1 w-1/4">
+                        <select
+                            v-model="company"
+                            name="type"
+                            id="company"
+                            class="w-full  border border-gray-300 rounded-lg shadow-sm"
+                        >
+                            <option v-for="company in props.companies">{{ company.name }}</option>
+                        </select>
+                    </div>
+                    <span v-if="companyError" class="text-sm text-red-600">{{ companyError }}</span>
+
+                </div>
+
+                <div>
+                    <label for="type" class="block text-sm font-medium">Type</label>
+                    <div class="mt-1 w-1/4">
+                        <select
+                            v-model="type"
+                            name="type"
+                            id="type"
+                            class="w-full  border border-gray-300 rounded-lg shadow-sm"
+                        >
+                            <option v-for="type in props.types">{{ type.title }}</option>
+                        </select>
+                    </div>
+                    <span v-if="typeError" class="text-sm text-red-600">{{ typeError }}</span>
+
+                </div>
+
+                <div class="flex items-center">
+                    <input id="active" v-model="active" name="terms-and-privacy" type="checkbox" class="" />
+                    <label for="active" class="ml-2 block text-sm text-gray-900"
+                    >Set this job active
+                    </label>
+                </div>
+
+                <div>
+                    <button type="submit" class="w-1/4 flex justify-center
+                             py-2 px-4 border border-transparent
+                              rounded-md shadow-sm text-sm font-medium text-white
+                     bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
+                      focus:ring-offset-2 focus:ring-indigo-500">
+                        Create
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+
 </template>
 
 <script>
 import Layout from "../../../Shared/Layout";
+import Toggle from '@vueform/toggle'
 
 export default {
-    layout: Layout
+    name: "Edit",
+
+    layout: Layout,
+    components: { Toggle }
 }
 </script>
 
 <script setup>
-import { useForm } from "@inertiajs/inertia-vue3";
 
-const props = defineProps(
+import * as yup from "yup";
+import {useField, useForm} from "vee-validate";
+import {Inertia} from "@inertiajs/inertia";
 
-)
 
-let form = useForm({
-    name: '',
-    email: '',
-    password: '',
+const props = defineProps({
+    types: Object,
+    companies: Object
+})
+
+const schema = yup.object({
+    title: yup.string().required().min(5),
+    description: yup.string().required(),
+    content: yup.string().required(),
+    company: yup.object().nullable(),
+    newCompany: yup.string(),
+    type: yup.string().required(),
+    active: yup.bool(),
+    exisitng: yup.bool(),
 });
-let submit = () => {
-    form.post('/login');
-};
+
+const { handleSubmit } = useForm({
+    validationSchema: schema,
+});
+
+const { value: title, errorMessage: titleError } = useField(
+    'title',
+    null,
+);
+const { value: description, errorMessage: descriptionError } = useField(
+    'description',
+    null,
+);
+const { value: content, errorMessage: contentError } = useField(
+    'content',
+    null,
+);
+const { value: company, errorMessage: companyError } = useField(
+    'company',
+    null,
+);
+const { value: newCompany, errorMessage: newCompanyError } = useField(
+    'newCompany',
+    null,
+);
+const { value: type, errorMessage: typeError } = useField(
+    'type',
+    null,
+);
+const { value: active, errorMessage: activeError } = useField(
+    'active',
+    null,
+    {initialValue:false}
+);
+const { value: existing, errorMessage: existingError } = useField(
+    'existing',
+    null,
+    {initialValue:false}
+);
+
+
+const submit = handleSubmit((values) => {
+    Inertia.post(route('admin.jobs.store'), {
+        title: values.title,
+        description:values.description,
+        content: values.content,
+        company: values.company ?? values.newCompany,
+        type: values.type,
+        is_active: values.active
+    })
+})
+
 </script>

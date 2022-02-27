@@ -5,6 +5,8 @@ import { InertiaProgress } from "@inertiajs/progress";
 import { ZiggyVue } from "ziggy";
 import { Ziggy } from "./ziggy";
 import VueSweetalert2 from "vue-sweetalert2";
+import Vue from 'vue'
+
 
 InertiaProgress.init();
 

@@ -64,4 +64,12 @@ interface TypeDataServiceContract
      * @return bool
      */
     public function delete(Type $type): bool;
+
+    /**
+     * Fetch a type by name
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function getByName(string $name): Type;
 }

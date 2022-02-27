@@ -30,6 +30,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init();
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.createInertiaApp)({
   resolve: function () {
@@ -826,16 +827,6 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Admin_Cities_Create_vue"
 	],
-	"./Admin/Cities/Detail": [
-		"./resources/js/Pages/Admin/Cities/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Cities_Detail_vue"
-	],
-	"./Admin/Cities/Detail.vue": [
-		"./resources/js/Pages/Admin/Cities/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Cities_Detail_vue"
-	],
 	"./Admin/Cities/Edit": [
 		"./resources/js/Pages/Admin/Cities/Edit.vue",
 		"/js/vendor",
@@ -865,16 +856,6 @@ var map = {
 		"./resources/js/Pages/Admin/Companies/Create.vue",
 		"/js/vendor",
 		"resources_js_Pages_Admin_Companies_Create_vue"
-	],
-	"./Admin/Companies/Detail": [
-		"./resources/js/Pages/Admin/Companies/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Companies_Detail_vue"
-	],
-	"./Admin/Companies/Detail.vue": [
-		"./resources/js/Pages/Admin/Companies/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Companies_Detail_vue"
 	],
 	"./Admin/Companies/Edit": [
 		"./resources/js/Pages/Admin/Companies/Edit.vue",
@@ -916,16 +897,6 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Admin_Jobs_Create_vue"
 	],
-	"./Admin/Jobs/Detail": [
-		"./resources/js/Pages/Admin/Jobs/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Jobs_Detail_vue"
-	],
-	"./Admin/Jobs/Detail.vue": [
-		"./resources/js/Pages/Admin/Jobs/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Jobs_Detail_vue"
-	],
 	"./Admin/Jobs/Edit": [
 		"./resources/js/Pages/Admin/Jobs/Edit.vue",
 		"/js/vendor",
@@ -955,16 +926,6 @@ var map = {
 		"./resources/js/Pages/Admin/Types/Create.vue",
 		"/js/vendor",
 		"resources_js_Pages_Admin_Types_Create_vue"
-	],
-	"./Admin/Types/Detail": [
-		"./resources/js/Pages/Admin/Types/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Types_Detail_vue"
-	],
-	"./Admin/Types/Detail.vue": [
-		"./resources/js/Pages/Admin/Types/Detail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Admin_Types_Detail_vue"
 	],
 	"./Admin/Types/Edit": [
 		"./resources/js/Pages/Admin/Types/Edit.vue",

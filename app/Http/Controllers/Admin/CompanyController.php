@@ -31,7 +31,7 @@ class CompanyController extends Controller
      */
     public function index(): Response
     {
-        $companies = $this->companyService->paginated(5, ['city']);
+        $companies = $this->companyService->paginated(5, ['city', 'jobs']);
 
         return Inertia::render(
             component: $this->componentPrefix.'/Index',

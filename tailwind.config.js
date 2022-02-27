@@ -2,5 +2,7 @@ module.exports = {
     content: ["./resources/js/**/*.{vue,js}"],  theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+      require('@tailwindcss/forms')
+  ],
 }

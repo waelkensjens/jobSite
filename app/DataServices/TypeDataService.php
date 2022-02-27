@@ -57,4 +57,9 @@ class TypeDataService implements TypeDataServiceContract
     {
        return $type->delete();
     }
+
+    public function getByName(string $name): Type
+    {
+        return Type::where('title', $name)->first();
+    }
 }
