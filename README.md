@@ -32,6 +32,10 @@ Maak gebruik van:
 
 > php artisan migrate --seed 
 
+> cp .env.example .env
+
+> php artisan key:generate
+
 this will create:
 
 - user admin@admin.com => password

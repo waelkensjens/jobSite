@@ -4,6 +4,7 @@ namespace App\DataServices;
 
 use App\Models\Job;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use PhpParser\Node\Stmt\Return_;
 
 class JobDataService implements Contracts\JobDataServiceContract
@@ -50,5 +51,10 @@ class JobDataService implements Contracts\JobDataServiceContract
     public function delete(Job $job): bool
     {
         return $job->delete();
+    }
+
+    public function onlyActive(): Collection
+    {
+        return Job::where('is_active', true)->get();
     }
 }

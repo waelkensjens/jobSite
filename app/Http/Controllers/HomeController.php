@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataServices\Contracts\JobDataServiceContract;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class HomeController extends Controller
 {
@@ -17,8 +18,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $jobs = $this->jobDataService->list();
-
+        $jobs = $this->jobDataService->onlyActive();
 
         return Inertia::render(
             'Home',
@@ -32,13 +32,11 @@ class HomeController extends Controller
      * render details of a job
      *
      * @param int $jobId
-     * @return \Inertia\Response
+     * @return Response
      */
-    public function detail(int $jobId): \Inertia\Response
+    public function detail(int $jobId): Response
     {
         $job = $this->jobDataService->getById($jobId);
-
-
 
         return Inertia::render(
             'Detail',

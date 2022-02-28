@@ -4,6 +4,7 @@ namespace App\DataServices\Contracts;
 
 use App\Models\Job;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface JobDataServiceContract
 {
@@ -56,6 +57,13 @@ interface JobDataServiceContract
      * @return bool
      */
     public function delete(Job $job): bool;
+
+    /**
+     * Fetch all jobs that are active
+     *
+     * @return Collection
+     */
+    public function onlyActive(): Collection;
 
 
 }
