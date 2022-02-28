@@ -26,7 +26,7 @@ class JobFactory extends Factory
             'title' => $this->faker->jobTitle,
             'description' => $this->faker->text,
             'content' => $this->faker->text,
-            'company_id' => 1,
+            'company_id' => $this->faker->numberBetween(1,2),
             'type_id' => 1,
         ];
     }
