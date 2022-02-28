@@ -32,18 +32,34 @@ Maak gebruik van:
 
 > php artisan migrate --seed 
 
-if wanted 
+this will create:
+
+- user adin@admin.com => password
+- 5 jobs divided over 2 companies
+- 2 companies
+- 2 Types
+
+if wanted u can import all belgian cities
 
 > php artisan cities:import 
+
+
+then:
 
 > php artisan serve 
 
 > yarn watch 
 
 
+## Pages
+/ => joblistings
+
+/{jobId}/ => jobDetail
+
+/admin => admin side
 ## Time spent
 
-16hours mostly frontend since vue skills aren't that great
+18hours mostly frontend since vue skills aren't that great
 
 ## Own Thoughts
 
