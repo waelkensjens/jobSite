@@ -95,16 +95,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/jobs/{jobId}', [HomeController::class, 'detail'])->name('jobs.detail');
 
-Route::get('/contacts', function () {
-    return inertia('Contacts/Index');
-});
-Route::get('/dashboard', function () {
-    return inertia('Dashboard/Index');
-});
-Route::get('/organisations', function () {
-    return inertia('Organizations/Index');
-});
-Route::get('/reports', function () {
-    return inertia('Reports/Index');
-});

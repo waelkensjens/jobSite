@@ -23,7 +23,13 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company,
             'VAT' => "BE0123456789",
-            'city_id' => City::factory()->create()
+            'city_id' => $this->faker->numberBetween(1, 125),
+            'data' => json_encode(
+                [
+                    'street' => $this->faker->streetName,
+                    'number' => $this->faker->randomNumber()
+                ]
+            )
         ];
     }
 
