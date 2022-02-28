@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Company;
+use App\Services\Contracts\CityServiceContract;
 use App\Services\Contracts\CompanyServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,10 +18,14 @@ class CompanyController extends Controller
 
     protected CompanyServiceContract $companyService;
     protected string $componentPrefix;
+    protected CityServiceContract $cityService;
 
-    public function __construct(CompanyServiceContract $companyService)
-    {
+    public function __construct(
+        CompanyServiceContract $companyService,
+        CityServiceContract $cityService
+    ) {
         $this->companyService = $companyService;
+        $this->cityService = $cityService;
         $this->componentPrefix = 'Admin/Companies';
     }
 
@@ -48,10 +53,12 @@ class CompanyController extends Controller
      */
     public function create(): Response
     {
+        $cities = $this->cityService->list();
+
         return Inertia::render(
             component: $this->componentPrefix.'/Create',
             props: [
-
+                'cities' => $cities
             ]
         );
     }
@@ -60,24 +67,19 @@ class CompanyController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StorecompanyRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(StorecompanyRequest $request): Response
+    public function store(StorecompanyRequest $request): RedirectResponse
     {
         $this->companyService->create(
             data: $request->all()
         );
 
-        $companies = $this->companyService->list();
-
-        return Inertia::render(
-            $this->componentPrefix.'/Index',
-            [
-                'companies' => $companies
-            ]
+        return redirect()->to(
+            route('admin.companies.index')
         )->with(
             [
-                'message' => 'companie was succesfully created'
+                'success' => 'company was successfully created'
             ]
         );
     }
@@ -108,10 +110,14 @@ class CompanyController extends Controller
     {
         $company = $this->companyService->getById($companyId);
 
+        $cities = $this->cityService->list();
+
+        $company['data'] = json_decode($company['data']);
         return Inertia::render(
             $this->componentPrefix.'/Edit',
             [
-                'company' => $company
+                'company' => $company,
+                'cities' => $cities,
             ]
         );
     }
@@ -142,13 +148,15 @@ class CompanyController extends Controller
      */
     public function destroy(int $companyId): RedirectResponse
     {
-        $this->companyService->delete($company);
+        $this->companyService->delete($companyId);
 
         return redirect()
-            ->back()
+            ->to(
+                route('admin.companies.index')
+            )
             ->with(
                 [
-                    "message" => 'companie successfully deleted'
+                    "success" => 'company successfully deleted'
                 ]
             );
     }

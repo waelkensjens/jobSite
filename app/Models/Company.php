@@ -14,6 +14,14 @@ class Company extends Model
 
     protected $guarded = [];
 
+    protected $with = [
+        'city'
+    ];
+
+    protected $casts = [
+        'data' => 'array'
+    ];
+
     /**
      * jobs relationShip a company can have many jobs
      *

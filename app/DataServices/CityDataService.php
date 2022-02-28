@@ -51,4 +51,9 @@ class CityDataService implements Contracts\CityDataServiceContract
     {
         return $city->delete();
     }
+
+    public function getByName(string $name)
+    {
+        return City::where('name', $name)->first();
+    }
 }

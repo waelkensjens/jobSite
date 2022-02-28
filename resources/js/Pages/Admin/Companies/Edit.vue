@@ -1,76 +1,74 @@
 <template>
 
-    <h1 class="text-3xl">Create New Job</h1>
+    <h1 class="text-3xl">Edit Company</h1>
 
-    <div class="mt-8 sm:mx-auto sm:w-full w-full">
+    <div class="text-right float-right mb-10 pb-10">
+        <button
+            @click="deleteCompany"
+            type="submit" class="w-90 flex justify-center
+                             py-2 px-4 border border-transparent
+                              rounded-md shadow-sm text-sm font-medium text-white
+                     bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2
+                      focus:ring-offset-2 focus:ring-indigo-500">
+            Delete
+        </button>
+    </div>
+
+    <div class="mt-8 pt-8 sm:mx-auto sm:w-full w-full">
         <div class="bg-white py-8 px-6 border border-gray-300 shadow rounded-lg sm:px-10">
             <form
                 @submit.prevent="submit"
                 class="mb-0 space-y-6" >
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700">title</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">name</label>
                     <div class="mt-1 w-2/4">
                         <input
-                            v-model="title"
-                            id="title" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="titleError" class="text-sm text-red-600">{{ titleError }}</span>
+                            v-model="name"
+                            id="name" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="nameError" class="text-sm text-red-600">{{ nameError }}</span>
                     </div>
                 </div>
                 <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="vat" class="block text-sm font-medium text-gray-700">vat</label>
                     <div class="mt-1 w-2/4">
                         <input
-                            v-model="description"
-                            id="description" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="descriptionError" class="text-sm text-red-600">{{ descriptionError }}</span>
+                            v-model="vat"
+                            id="vat" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="vatError" class="text-sm text-red-600">{{ vatError }}</span>
                     </div>
                 </div>
                 <div>
-                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                    <label for="street" class="block text-sm font-medium text-gray-700">street</label>
                     <div class="mt-1 w-2/4">
                         <input
-                            v-model="content"
-                            id="content" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="contentError" class="text-sm text-red-600">{{ contentError }}</span>
+                            v-model="street"
+                            id="street" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="streetError" class="text-sm text-red-600">{{ streetError }}</span>
                     </div>
                 </div>
-                <div >
-                    <label for="company" class="block text-sm font-medium">Company</label>
+                <div>
+                    <label for="number" class="block text-sm font-medium text-gray-700">number</label>
+                    <div class="mt-1 w-2/4">
+                        <input
+                            v-model="number"
+                            id="number" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="numberError" class="text-sm text-red-600">{{ numberError }}</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="city" class="block text-sm font-medium">city</label>
                     <div class="mt-1 w-1/4">
                         <select
-                            v-model="company"
-                            name="type"
-                            id="company"
+                            v-model="city"
+                            name="city"
+                            id="city"
                             class="w-full  border border-gray-300 rounded-lg shadow-sm"
                         >
-                            <option v-for="company in props.companies">{{ company.name }}</option>
+                            <option v-for="city in props.cities">{{ city.name }}</option>
                         </select>
                     </div>
-                    <span v-if="companyError" class="text-sm text-red-600">{{ companyError }}</span>
+                    <span v-if="cityError" class="text-sm text-red-600">{{ cityError }}</span>
 
-                </div>
-
-                <div>
-                    <label for="type" class="block text-sm font-medium">Type</label>
-                    <div class="mt-1 w-1/4">
-                        <select
-                            v-model="type"
-                            name="type"
-                            id="type"
-                            class="w-full  border border-gray-300 rounded-lg shadow-sm"
-                        >
-                            <option v-for="type in props.types">{{ type.title }}</option>
-                        </select>
-                    </div>
-                    <span v-if="typeError" class="text-sm text-red-600">{{ typeError }}</span>
-
-                </div>
-
-                <div class="flex items-center">
-                    <input id="active" v-model="active" type="checkbox" class="" />
-                    <label for="active" class="ml-2 block text-sm text-gray-900"
-                    >Set this job active
-                    </label>
                 </div>
 
                 <div>
@@ -105,72 +103,80 @@ export default {
 import * as yup from "yup";
 import {useField, useForm} from "vee-validate";
 import {Inertia} from "@inertiajs/inertia";
-import {boolean} from "yup";
+import Swal from "sweetalert2";
 
 
 const props = defineProps({
-    job:Object,
-    types: Object,
-    companies: Object
+    company:Object,
+    cities: Object
 })
 
 const schema = yup.object({
-    title: yup.string().required().min(5),
-    description: yup.string().required(),
-    content: yup.string().required(),
-    company: yup.object().nullable(),
-    type: yup.string().required(),
-    active: yup.bool(),
+    name: yup.string().required().min(5),
+    vat: yup.string().required(),
+    city: yup.string().required(),
+    address: yup.object().nullable(),
 });
 
 const { handleSubmit } = useForm({
     validationSchema: schema,
 });
 
-const { value: title, errorMessage: titleError } = useField(
-    'title',
+const { value: name, errorMessage: nameError } = useField(
+    'name',
     null,
-    {initialValue: props.job.title}
+    {initialValue: props.company.name}
 
 );
-const { value: description, errorMessage: descriptionError } = useField(
-    'description',
+const { value: vat, errorMessage: vatError } = useField(
+    'vat',
     null,
-    {initialValue: props.job.description}
+    {initialValue: props.company.VAT}
 
 );
-const { value: content, errorMessage: contentError } = useField(
-    'content',
+const { value: city, errorMessage: cityError } = useField(
+    'city',
     null,
-    {initialValue: props.job.content}
+    {initialValue: props.company.city?.name}
 
 );
-const { value: company, errorMessage: companyError } = useField(
-    'company',
+const { value: street, errorMessage: streetError } = useField(
+    'street',
     null,
-    {initialValue: props.job.company.name}
+    {initialValue: props.company.data?.street}
 );
-const { value: type, errorMessage: typeError } = useField(
-    'type',
+const { value: number, errorMessage: numberError } = useField(
+    'number',
     null,
-    {initialValue: props.job.type.title}
+    {initialValue: props.company.data?.number}
 );
-const { value: active, errorMessage: activeError } = useField(
-    'active',
-    null,
-    {initialValue: Boolean(props.job.is_active)}
-);
-
 
 const submit = handleSubmit((values) => {
-    Inertia.post(route('admin.jobs.update', {jobId: props.job.id}), {
-        title: values.title,
-        description:values.description,
-        content: values.content,
-        company: values.company,
-        type: values.type,
-        is_active: values.active
+    Inertia.post(route('admin.companies.update', {companyId: props.company.id}), {
+        name: values.name,
+        vat: values.vat,
+        city: values.city,
+        data: {
+            street: values.street,
+            number: values.number,
+        }
     })
 })
+
+const deleteCompany = () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this! and all jobs will be deleted to",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result) {
+            Inertia.delete(route('admin.companies.destroy', {companyId: props.company.id}))
+        }
+    })
+}
 
 </script>

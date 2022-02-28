@@ -1,6 +1,6 @@
 <template>
 
-    <h1 class="text-3xl">Create New Job</h1>
+    <h1 class="text-3xl">Create New Type</h1>
 
     <div class="mt-8 sm:mx-auto sm:w-full w-full">
         <div class="bg-white py-8 px-6 border border-gray-300 shadow rounded-lg sm:px-10">
@@ -8,90 +8,61 @@
                 @submit.prevent="submit"
                 class="mb-0 space-y-6" >
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700">title</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">name</label>
                     <div class="mt-1 w-2/4">
                         <input
-                            v-model="title"
-                            id="title" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="titleError" class="text-sm text-red-600">{{ titleError }}</span>
+                            v-model="name"
+                            id="name" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="nameError" class="text-sm text-red-600">{{ nameError }}</span>
                     </div>
                 </div>
+
                 <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="vat" class="block text-sm font-medium text-gray-700">vat</label>
                     <div class="mt-1 w-2/4">
                         <input
-                            v-model="description"
-                            id="description" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="descriptionError" class="text-sm text-red-600">{{ descriptionError }}</span>
+                            v-model="vat"
+                            id="vat" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="vatError" class="text-sm text-red-600">{{ vatError }}</span>
                     </div>
                 </div>
+
+                <div class="flex w-full">
+                    <div class="flex-col">
+                    <label for="street" class="block text-sm font-medium text-gray-700">street</label>
+                    <div class="mt-1 w-full">
+                        <input
+                            v-model="street"
+                            id="street" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                        <span v-if="streetError" class="text-sm text-red-600">{{ streetError }}</span>
+                    </div>
+                    </div>
+                    <div class="ml-8">
+                        <label for="number" class="block text-sm font-medium text-gray-700">number</label>
+                        <div class="mt-1 w-2/4">
+                            <input
+                                v-model="number"
+                                id="number" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
+                            <span v-if="numberError" class="text-sm text-red-600">{{ numberError }}</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
-                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
-                    <div class="mt-1 w-2/4">
-                        <input
-                            v-model="content"
-                            id="content" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="contentError" class="text-sm text-red-600">{{ contentError }}</span>
-                    </div>
-                </div>
-
-                <div class="flex items-center">
-                    <input id="existing" v-model="existing" name="terms-and-privacy" type="checkbox" class="" />
-                    <label for="existing" class="ml-2 block text-sm text-gray-900"
-                    >use existing company?
-                    </label>
-                </div>
-
-
-                <div v-if="!existing">
-                    <label for="content" class="block text-sm font-medium text-gray-700">Company name</label>
-                    <div class="mt-1 w-2/4">
-                        <input
-                            v-model="newCompany"
-                            id="newCompany" type="text" class="w-full border border-gray-300 rounded-lg shadow-sm" />
-                        <span v-if="newCompanyError" class="text-sm text-red-600">{{ newCompanyError }}</span>
-                    </div>
-                </div>
-
-                <div v-else>
-                    <label for="company" class="block text-sm font-medium">Company</label>
+                    <label for="type" class="block text-sm font-medium">city</label>
                     <div class="mt-1 w-1/4">
                         <select
-                            v-model="company"
-                            name="type"
-                            id="company"
-                            class="w-full  border border-gray-300 rounded-lg shadow-sm"
-                        >
-                            <option v-for="company in props.companies">{{ company.name }}</option>
-                        </select>
-                    </div>
-                    <span v-if="companyError" class="text-sm text-red-600">{{ companyError }}</span>
-
-                </div>
-
-                <div>
-                    <label for="type" class="block text-sm font-medium">Type</label>
-                    <div class="mt-1 w-1/4">
-                        <select
-                            v-model="type"
-                            name="type"
+                            v-model="city"
+                            name="city"
                             id="type"
                             class="w-full  border border-gray-300 rounded-lg shadow-sm"
                         >
-                            <option v-for="type in props.types">{{ type.title }}</option>
+                            <option v-for="city in props.cities">{{ city.name }}</option>
                         </select>
                     </div>
-                    <span v-if="typeError" class="text-sm text-red-600">{{ typeError }}</span>
+                    <span v-if="cityError" class="text-sm text-red-600">{{ cityError }}</span>
 
                 </div>
-
-                <div class="flex items-center">
-                    <input id="active" v-model="active" name="terms-and-privacy" type="checkbox" class="" />
-                    <label for="active" class="ml-2 block text-sm text-gray-900"
-                    >Set this job active
-                    </label>
-                </div>
-
                 <div>
                     <button type="submit" class="w-1/4 flex justify-center
                              py-2 px-4 border border-transparent
@@ -109,17 +80,18 @@
 
 <script>
 import Layout from "../../../Shared/Layout";
-import Toggle from '@vueform/toggle'
 
 export default {
     name: "Edit",
 
     layout: Layout,
-    components: { Toggle }
 }
+
 </script>
 
 <script setup>
+
+
 
 import * as yup from "yup";
 import {useField, useForm} from "vee-validate";
@@ -127,69 +99,52 @@ import {Inertia} from "@inertiajs/inertia";
 
 
 const props = defineProps({
-    types: Object,
-    companies: Object
+    cities: Object
 })
 
 const schema = yup.object({
-    title: yup.string().required().min(5),
-    description: yup.string().required(),
-    content: yup.string().required(),
-    company: yup.object().nullable(),
-    newCompany: yup.string(),
-    type: yup.string().required(),
-    active: yup.bool(),
-    exisitng: yup.bool(),
+    name: yup.string().required().min(5),
+    vat: yup.string().required(),
+    street: yup.string().required(),
+    number: yup.number().required(),
+    city: yup.string().required(),
 });
 
 const { handleSubmit } = useForm({
     validationSchema: schema,
 });
 
-const { value: title, errorMessage: titleError } = useField(
-    'title',
+const { value: name, errorMessage: nameError } = useField(
+    'name',
     null,
 );
-const { value: description, errorMessage: descriptionError } = useField(
-    'description',
+const { value: vat, errorMessage: vatError } = useField(
+    'vat',
     null,
 );
-const { value: content, errorMessage: contentError } = useField(
-    'content',
+const { value: street, errorMessage: streetError } = useField(
+    'street',
     null,
 );
-const { value: company, errorMessage: companyError } = useField(
-    'company',
+const { value: number, errorMessage: numberError } = useField(
+    'number',
     null,
 );
-const { value: newCompany, errorMessage: newCompanyError } = useField(
-    'newCompany',
+const { value: city, errorMessage: cityError } = useField(
+    'city',
     null,
-);
-const { value: type, errorMessage: typeError } = useField(
-    'type',
-    null,
-);
-const { value: active, errorMessage: activeError } = useField(
-    'active',
-    null,
-    {initialValue:false}
-);
-const { value: existing, errorMessage: existingError } = useField(
-    'existing',
-    null,
-    {initialValue:false}
 );
 
 
 const submit = handleSubmit((values) => {
-    Inertia.post(route('admin.jobs.store'), {
-        title: values.title,
-        description:values.description,
-        content: values.content,
-        company: values.company ?? values.newCompany,
-        type: values.type,
-        is_active: values.active
+    Inertia.post(route('admin.companies.store'), {
+        name: values.name,
+        vat: values.vat,
+        city: values.city,
+        data: {
+            street: values.street,
+            number: values.number,
+        }
     })
 })
 

@@ -56,4 +56,6 @@ interface CityDataServiceContract
      * @return bool
      */
     public function delete(City $city): bool;
+
+    public function getByName(string $name);
 }

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Head title="jobs" />
-        <h1 class="mb-8 text-3xl font-bold">jobs</h1>
+        <Head title="companies" />
+        <h1 class="mb-8 text-3xl font-bold">companies</h1>
         <div class="px-4 py-3 text-right sm:px-6">
             <button
                 @click="createNew"
@@ -19,42 +19,47 @@
                 <thead>
                 <tr class="text-left font-bold">
                     <th class="pb-4 pt-6 px-6">Name</th>
-                    <th class="pb-4 pt-6 px-6">Company</th>
-                    <th class="pb-4 pt-6 px-6" >Type</th>
-                    <th class="pb-4 pt-6 px-6" >Active</th>
+                    <th class="pb-4 pt-6 px-6">VAT</th>
+                    <th class="pb-4 pt-6 px-6" >City</th>
+                    <th class="pb-4 pt-6 px-6" >Address</th>
+                    <th class="pb-4 pt-6 px-6" >Jobs</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="job in jobs.data" :key="job.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                <tr v-for="company in companies.data" :key="company.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.jobs.edit', {jobId: job.id})">
-                            {{ job.title }}
-                            <icon v-if="job.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="route('admin.companies.edit', {companyId: company.id})">
+                            {{ company.name }}
                         </Link>
                     </td>
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            {{ job.company.name }}
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
+                            {{ company.VAT }}
                         </Link>
                     </td>
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            {{ job.type?.title }}
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
+                            {{ company.city?.name }}
                         </Link>
                     </td>
                     <td class="border-t">
-                        <Link class="flex items-center px-6 py-4" :href="route('admin.jobs.edit', {jobId: job.id})" tabindex="-1">
-                            {{ job.is_active? 'Active' : 'inactive' }}
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
+                            {{ company.data?.street + ' ' + company.data?.number }}
+                        </Link>
+                    </td>
+                    <td class="border-t">
+                        <Link class="flex items-center px-6 py-4" :href="route('admin.companies.edit', {companyId: company.id})" tabindex="-1">
+                            {{ Object.keys(company.jobs).length }}
                         </Link>
                     </td>
                 </tr>
-                <tr v-if="jobs.data.length === 0">
-                    <td class="px-6 py-4 border-t" colspan="4">No jobs found.</td>
+                <tr v-if="companies.data.length === 0">
+                    <td class="px-6 py-4 border-t" colspan="4">No companies found.</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <pagination class="mt-6" :links="jobs.links" />
+        <pagination class="mt-6" :links="companies.links" />
     </div>
 </template>
 <script>
@@ -100,11 +105,11 @@ export default {
 import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps(
-    {jobs: Object}
+    {companies: Object}
 )
 
 const createNew = () => {
-    Inertia.get(route('admin.jobs.create'))
+    Inertia.get(route('admin.companies.create'))
 }
 
 </script>
