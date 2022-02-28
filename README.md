@@ -34,7 +34,7 @@ Maak gebruik van:
 
 this will create:
 
-- user adin@admin.com => password
+- user admin@admin.com => password
 - 5 jobs divided over 2 companies
 - 2 companies
 - 2 Types
